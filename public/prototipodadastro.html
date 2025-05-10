@@ -1,0 +1,190 @@
+
+<style>
+body , html{
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.header{    
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    background-color: #6165b8;
+}
+.navbar-scrolled{
+    background-color: #ffffffd5 ;
+    backdrop-filter: blur(5px);	 
+
+
+}
+.navbar-scrolled .navbar a{
+    color: #000000;
+
+
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    justify-content: space-around;
+    align-items: center;
+}
+.navbar a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    font-size: 18px;
+}
+.navbar li{
+    list-style: none;
+}
+.header img{
+    width: auto;
+    height: 50px;
+}
+.container{
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    flex-direction: column;
+    align-items: center;
+    background-image: url(img/Inserir\ um\ subtítulo\ \(1550\ x\ 768\ px\)\ \(1\).png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:  center;
+    justify-content: center;
+    height: 100%;
+}
+.box{
+    display: flex;
+    margin-left: 300px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 500px;
+    height: 600px;
+    border-radius: 10px;
+    background-color: #bc97e76d;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color:#c47ffd00;
+    border-radius: 10px 0 0 10px;
+    
+}
+
+.direita{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    background-color: #f3b045;
+}
+.direita img{
+    width: 500px;
+    height: auto;
+
+}
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    align-items:start;
+    justify-content: center;
+    width: 80%;
+    height: fit-content;
+}
+.texto h1{
+    font-size: 35px;
+    margin-bottom: 5px;
+    color: #000000;
+}
+.texto p{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+.inputBox input{
+    width: 90%;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+
+label{
+    font-size: 20px;
+    margin-bottom: 5px;
+    color:#000000;
+}
+.inputBox button{
+    width: 30%;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    background-color: #f3b045;
+    color: #fffffffd;
+    font-size: 16px;
+    align-self: center;
+    cursor: pointer;
+}
+.inputBox button:hover{
+    scale: 1.05;
+    transition: 0.3s;
+}
+</style>
+<DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="navbar" class="header"> 
+        <img src="img/logoBranco.png" alt="">
+        <div class="navbar">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Sobre nós</a></li>
+        
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Cadastro</a></li>
+        </div>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="texto">
+                    <h1>Crie sua conta</h1>
+                <p>Já possui cadastro? <a>Log in</a> </p>
+                <div class="inputBox">
+                  <label for="ipt_nome">Nome</label>
+                  <input type="text" id="ipt_nome" placeholder="Digite seu nome" > 
+                  <label for="ipt_email">Email</label>
+                  <input type="email" id="ipt_email" placeholder="Digite seu email" >
+                    <label for="ipt_senha">Senha</label>
+                    <input type="password" id="ipt_senha" placeholder="Digite sua senha" >
+                    <label for="ipt_senha_confirma">Confirme sua senha</label>
+                    <input type="password" id="ipt_senha_confirma" placeholder="Digite sua senha novamente" >
+                    <button onclick="cadastrar()">Cadastrar</button>
+                    </div>
+                </div>
+        
+    
+</body>
+</html>
