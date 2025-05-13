@@ -71,6 +71,7 @@
     padding: 20px;
     width: 100%;
     transition: margin-left 0.3s;
+    overflow: scroll;
   }
 
   /* Estilizacao cards */
@@ -80,6 +81,7 @@
     width: 80%;
     gap: 20px;
     background-color: rgb(255, 255, 255);
+
   }
 
   .card {
@@ -102,23 +104,116 @@
     object-fit: cover;
 
   }
-.botaoadd{
-  background-color: #6165b8;
-  width: 200px;
-  height: 50px;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 20px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-;
 
-}
+  .botaoadd {
+    background-color: #6165b8;
+    width: 200px;
+    height: 50px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    ;
+
+  }
+  .botaoadd:hover {
+    background-color: #514dbe;
+  }
+  .main-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    backdrop-filter: blur(3px);
+
+  }
+  .containerform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    height: 80%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: scroll;
+    margin: auto;
+    padding: auto;
+
+
+
+
+  }
+  .formulario h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: poppins;
+    font-size: 30px;
+    font-weight: 600;
+    color: #6165b8;
+
+  }
+  .formulario p {
+    margin: 10px 0;
+    font-family: poppins;
+    font-size: 16px;
+    font-weight: 500;
+    align-self: flex-start;
+    width: 80%;
+    margin: auto;
+  }
+  .formulario input[type="text"],
+  .formulario input[type="date"],
+  .formulario select,
+  .formulario input[type="file"] {
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: poppins;
+  }
+  .formulario button {
+    background-color: #6165b8;
+    width: 80%;
+    margin: auto;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  .formulario #botaofechar{
+    position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 22px;
+  color: rgb(114, 56, 214);
+  cursor: pointer;
+    background-color: #ffffff00;
+  }
+  .formulario button:hover {
+    background-color: #514dbe;
+  }
 
 </style>
 <!DOCTYPE html>
@@ -158,29 +253,69 @@
         <img src="img/contact-icon.png" class="icon"> <span class="text">Contato</span>
       </a>
 
-    </div>
+    </div>      <div class="main-form">
+        <div class="containerform">
+          <form id="form" class="formulario">
+            
+            <h1>Adicione um novo projeto</h1><button id="botaofechar" onclick="fecharformulario()">x</button>
+            <p>Nome:</p>
+            <input type="text" id="ipt_nome">
+            <p>Descrição</p>
+            <input type="text" id="ipt_descricao">
+            <p>Fio utilizado</p>
+            <input type="text" id="ipt_fio">
+            <p>Agulha utilizada</p>
+            <input type="text" id="ipt_agulha">
+            <p>Status do projeto</p>
+            <select name="estado" id="select_estado">
+              <option value="iniciado">Iniciado</option>
+              <option value="andamento">Em andamento</option>
+              <option value="finalizado">Finalizado</option>
+            </select>
+            <p>Data em que foi iniciado</p>
+            <input type="date" id="ipt_data">
+            <p>Imagem do projeto</p>
+            <input type="file" id="ipt_imagem">
+            <button type="submit" id="btn_adicionar">Adicionar Projeto</button>
+          </form>
+
+
+        </div>
+      </div>
     <div class="main">
       <h1>Meus projetos</h1>
+
       <div class="container" id="projetosContainer">
-        <button class="botaoadd" id="botaoadd">Adicionar projeto</button>
-          <div class="card">
-        <img>
-        <h3>Casaco</h3>
-        <p>Feito em lã 100% artesanal</p>
-          </div>
-          <div class="card">
-        <img src="img/varias caixas de trico com projetos inacabados.jpg">
-        <h3>Touca</h3>
-        <p>Para presentear</p>
-          </div>
-          <div class="card">
-        <img>
-        <h3>Cachecol</h3>
-        <p>Para usar no inverno</p>
-          </div>
-        </div>
-        </div>
+        <button onclick="abrirformulario()" class="botaoadd" id="botaoadd">Adicionar projeto</button>
 
-        <script>
 
-        </script>
+
+
+        <div class="card">
+          <img>
+          <h3>Casaco</h3>
+          <p>Feito em lã 100% artesanal</p>
+        </div>
+        <div class="card">
+          <img src="img/varias caixas de trico com projetos inacabados.jpg">
+          <h3>Touca</h3>
+          <p>Para presentear</p>
+        </div>
+        <div class="card">
+          <img>
+          <h3>Cachecol</h3>
+          <p>Para usar no inverno</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+ function abrirformulario() {
+      const formulario = document.querySelector('.main-form');
+      formulario.style.display = 'flex';
+    }
+    function fecharformulario() {
+      const formulario = document.querySelector('.main-form');
+      formulario.style.display = 'none';
+    }
+    </script>
