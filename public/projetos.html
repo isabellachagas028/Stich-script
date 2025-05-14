@@ -43,7 +43,7 @@
     background-color: #514dbe;
   }
 
-  .icon {
+  i {
     width: 24px;
     margin-right: 16px;
   }
@@ -54,7 +54,11 @@
 
   .text {
     white-space: nowrap;
-    opacity: 0;
+    opacity:0;
+    
+
+    color:white
+    ;
     transition: opacity 0.2s;
   }
 
@@ -71,7 +75,6 @@
     padding: 20px;
     width: 100%;
     transition: margin-left 0.3s;
-    overflow: scroll;
   }
 
   /* Estilizacao cards */
@@ -218,7 +221,7 @@
 </style>
 <!DOCTYPE html>
 <html lang="en">
-
+  <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -233,24 +236,25 @@
     <div class="sidebar">
       <div class="perfil">
         <img src="img/iconeperfil.png" id="img-perfil">
-        <p class="text">Ola nome</p>
+        <p class="text">Olá <span id="b_usuario">usuário</span>!
+        </p>
 
       </div>
 
       <a href="#">
-        <img src="img/home-icon.png" class="icon"> <span class="text">Início</span>
+        <i class="fa-solid fa-house"></i><span class="text"> Início</span>
       </a>
       <a href="#">
-        <img src="img/project-icon.png" class="icon"> <span class="text">Projetos</span>
+        <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
       </a>
       <a href="#">
-        <img src="img/contact-icon.png" class="icon"> <span class="text">Dashboard</span>
+        <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
       </a>
       <a href="#">
-        <img src="img/about-icon.png" class="icon"> <span class="text">Quiz</span>
+        <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
       </a>
       <a href="#">
-        <img src="img/contact-icon.png" class="icon"> <span class="text">Contato</span>
+        <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
       </a>
 
     </div>      <div class="main-form">
@@ -318,4 +322,5 @@
       const formulario = document.querySelector('.main-form');
       formulario.style.display = 'none';
     }
+    b_usuario.innerHTML=sessionStorage.NOME_USUARIO;
     </script>
