@@ -227,12 +227,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>projetos</title>
   <link rel="stylesheet" href="style_projetos.css">
+  <script src="../js/sessao.js">
+  </script>
 </head>
 
-<body>
+<body onload="validarSessao(), exibirProjetos(),  atualizacaoPeriodica()">
 
 
-  <body>
+
     <div class="sidebar">
       <div class="perfil">
         <img src="img/iconeperfil.png" id="img-perfil">
@@ -323,4 +325,22 @@
       formulario.style.display = 'none';
     }
     b_usuario.innerHTML=sessionStorage.NOME_USUARIO;
+    console.log(sessionStorage.ID_USUARIO);
+    console.log(sessionStorage.PROJETOS_USUARIO)
+
+    function exibirProjetos() {
+        JSON.parse(sessionStorage.PROJETOS_USUARIO).forEach(item => {
+            document.getElementById("projetosContainer").innerHTML += `
+                    <div class="card">
+                            <h1>${item.nome}</h1>
+                        <p>${item.descricao}</p>  
+                        <p>${item.fio}</p>
+                        <p>${item.agulha}</p>
+                        
+
+                    </div>
+                    `
+        });
+    }
+
     </script>
