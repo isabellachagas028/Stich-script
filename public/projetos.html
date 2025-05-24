@@ -1,322 +1,136 @@
-<style>
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 60px;
-    height: 100%;
-    background-color: #6165b8;
-    backdrop-filter: blur 3px;
-    overflow-x: hidden;
-    transition: width 0.3s;
-    padding-top: 20px;
-    z-index: 100;
-  }
-
-  .sidebar:hover {
-    width: 200px;
-  }
-
-  .sidebar .perfil {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .sidebar .perfil img {
-    border: solid black 2px;
-    border-radius: 50%;
-    width: 40px;
-  }
-
-  .sidebar a {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .sidebar a:hover {
-    background-color: #514dbe;
-  }
-
-  i {
-    width: 24px;
-    margin-right: 16px;
-  }
-
-  .sidebar img-perfil {
-    border: seagreen 2 px solid;
-  }
-
-  .text {
-    white-space: nowrap;
-    opacity:0;
-    
-
-    color:white
-    ;
-    transition: opacity 0.2s;
-  }
-
-  .sidebar:hover .text {
-    opacity: 1;
-  }
-
-  .sidebar:hover~.main {
-    margin-left: 220px;
-  }
-
-  .main {
-    margin-left: 80px;
-    padding: 20px;
-    width: 100%;
-    transition: margin-left 0.3s;
-  }
-
-  /* Estilizacao cards */
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    gap: 20px;
-    background-color: rgb(255, 255, 255);
-
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(255, 255, 255);
-    border: solid rgb(174, 174, 174) 4px;
-    width: 30%;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-    min-height: 300px;
-    border-radius: 20px;
-
-  }
-
-  .card img {
-    align-self: center;
-    width: 100%;
-    height: 200px;
-    border-radius: 20px 20px 0 0;
-    object-fit: cover;
-
-  }
-
-  .botaoadd {
-    background-color: #6165b8;
-    width: 200px;
-    height: 50px;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    ;
-
-  }
-  .botaoadd:hover {
-    background-color: #514dbe;
-  }
-  .main-form {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    backdrop-filter: blur(3px);
-
-  }
-  .containerform{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%;
-    height: 80%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  }
-  .formulario {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow: scroll;
-    margin: auto;
-    padding: auto;
-
-
-
-
-  }
-  .formulario h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: poppins;
-    font-size: 30px;
-    font-weight: 600;
-    color: #6165b8;
-
-  }
-  .formulario p {
-    margin: 10px 0;
-    font-family: poppins;
-    font-size: 16px;
-    font-weight: 500;
-    align-self: flex-start;
-    width: 80%;
-    margin: auto;
-  }
-  .formulario input[type="text"],
-  .formulario input[type="date"],
-  .formulario select,
-  .formulario input[type="file"] {
-    width: 80%;
-    padding: 10px;
-    margin: auto;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: poppins;
-  }
-  .formulario button {
-    background-color: #6165b8;
-    width: 80%;
-    margin: auto;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  .formulario #botaofechar{
-    position: absolute;
-  top: 10px;
-  right: 18px;
-  font-size: 22px;
-  color: rgb(114, 56, 214);
-  cursor: pointer;
-    background-color: #ffffff00;
-  }
-  .formulario button:hover {
-    background-color: #514dbe;
-  }
-
-</style>
 <!DOCTYPE html>
 <html lang="en">
-  <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
+
 <head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+  </style>
+
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>projetos</title>
-  <link rel="stylesheet" href="style_projetos.css">
+  <link rel="stylesheet" href="projetos.css">
   <script src="../js/sessao.js">
   </script>
 </head>
 
-<body onload="validarSessao(), exibirProjetos(),  atualizacaoPeriodica()">
+<body onload="validarSessao(), buscarEExibirProjetos(),  atualizacaoPeriodica()">
 
 
 
-    <div class="sidebar">
-      <div class="perfil">
-        <img src="img/iconeperfil.png" id="img-perfil">
-        <p class="text">Olá <span id="b_usuario">usuário</span>!
-        </p>
+  <div class="sidebar">
+    <div class="perfil">
+      <img src="img/iconeperfil.png" id="img-perfil">
+      <p class="text">Olá <span id="b_usuario">usuário</span>!
+      </p>
 
-      </div>
-
-      <a href="#">
-        <i class="fa-solid fa-house"></i><span class="text"> Início</span>
-      </a>
-      <a href="#">
-        <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
-      </a>
-      <a href="#">
-        <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
-      </a>
-      <a href="#">
-        <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
-      </a>
-      <a href="#">
-        <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
-      </a>
-
-    </div>      <div class="main-form">
-        <div class="containerform">
-          <form id="form" class="formulario">
-            
-            <h1>Adicione um novo projeto</h1><button id="botaofechar" onclick="fecharformulario()">x</button>
-            <p>Nome:</p>
-            <input type="text" id="ipt_nome">
-            <p>Descrição</p>
-            <input type="text" id="ipt_descricao">
-            <p>Fio utilizado</p>
-            <input type="text" id="ipt_fio">
-            <p>Agulha utilizada</p>
-            <input type="text" id="ipt_agulha">
-            <p>Status do projeto</p>
-            <select name="estado" id="select_estado">
-              <option value="iniciado">Iniciado</option>
-              <option value="andamento">Em andamento</option>
-              <option value="finalizado">Finalizado</option>
-            </select>
-            <p>Data em que foi iniciado</p>
-            <input type="date" id="ipt_data">
-            <p>Imagem do projeto</p>
-            <input type="file" id="ipt_imagem">
-            <button type="submit" id="btn_adicionar">Adicionar Projeto</button>
-          </form>
-
-
-        </div>
-      </div>
-    <div class="main">
-      <h1>Meus projetos</h1>
-
-      <div class="container" id="projetosContainer">
-        <button onclick="abrirformulario()" class="botaoadd" id="botaoadd">Adicionar projeto</button>
-
-
-
-
-        <div class="card">
-          <img>
-          <h3>Casaco</h3>
-          <p>Feito em lã 100% artesanal</p>
-        </div>
-        <div class="card">
-          <img src="img/varias caixas de trico com projetos inacabados.jpg">
-          <h3>Touca</h3>
-          <p>Para presentear</p>
-        </div>
-        <div class="card">
-          <img>
-          <h3>Cachecol</h3>
-          <p>Para usar no inverno</p>
-        </div>
-      </div>
     </div>
 
-    <script>
- function abrirformulario() {
+    <a href="#">
+      <i class="fa-solid fa-house"></i><span class="text"> Início</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
+    </a>
+
+  </div>
+  <div class="main-form">
+    <div class="containerform">
+      <form id="form" class="formulario">
+
+        <h1>Adicione um novo projeto</h1><button id="botaofechar" onclick="fecharformulario()">x</button>
+        <p>Nome:</p>
+        <input type="text" id="ipt_nome">
+        <p>Descrição</p>
+        <input type="text" id="ipt_descricao">
+        <p>Fio utilizado</p>
+        <input type="text" id="ipt_fio">
+        <p>Agulha utilizada</p>
+        <input type="text" id="ipt_agulha">
+        <p>Status do projeto</p>
+        <select name="estado" id="select_estado">
+          <option value="iniciado">Iniciado</option>
+          <option value="andamento">Em andamento</option>
+          <option value="finalizado">Finalizado</option>
+        </select>
+        <p>Data em que foi iniciado</p>
+        <input type="date" id="ipt_data">
+        <p>Imagem do projeto</p>
+        <input type="file" id="ipt_imagem">
+        <button onclick="cadastrar()" id="btn_adicionar">Adicionar Projeto</button>
+      </form>
+
+
+    </div>
+  </div>
+  <div class="main">
+    <h1>Meus projetos</h1>
+
+ <button onclick="abrirformulario()" class="botaoadd" id="botaoadd">Adicionar projeto</button>
+    <div class="container" id="projetosContainer">
+      <h1>Projetos em andamento</h1>
+    </div>
+            <h1>Projetos finalizados</h1>
+      <div class="container" id="projetosContainerFinalizados">
+
+        </div>
+
+
+
+  <script>
+    function cadastrar(){
+    // Pegar os dados do formulario
+    let nomevar=ipt_nome.value
+    let descricaovar=ipt_descricao.value
+    let fiovar=ipt_fio.value
+    let agulhavar=ipt_agulha.value
+    let estadovar=select_estado.value
+    let datavar=ipt_data.value
+    let imagem=ipt_imagem.value
+    let usuario=sessionStorage.ID_USUARIO
+    //Mandar os dados do formulario para o backend
+    fetch("/projetos/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+      nomeServer: nomevar,
+      descricaoServer: descricaovar,
+      fioServer:fiovar,
+      agulhaServer: agulhavar,
+      estadoServer: estadovar,
+      dataServer: datavar,
+      fkUsuarioServer: usuario
+      })
+    })
+    .then(function(resposta){
+      console.log("resposta: ", resposta);
+      if(resposta.ok){
+        alert("Projeto cadastrado com sucesso!")
+        window.location.reload()
+      }else{
+        alert("Houve um erro ao cadastrar o projeto")
+      }
+    })
+  }
+
+
+    function abrirformulario() {
       const formulario = document.querySelector('.main-form');
       formulario.style.display = 'flex';
     }
@@ -324,23 +138,132 @@
       const formulario = document.querySelector('.main-form');
       formulario.style.display = 'none';
     }
-    b_usuario.innerHTML=sessionStorage.NOME_USUARIO;
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     console.log(sessionStorage.ID_USUARIO);
     console.log(sessionStorage.PROJETOS_USUARIO)
 
-    function exibirProjetos() {
-        JSON.parse(sessionStorage.PROJETOS_USUARIO).forEach(item => {
-            document.getElementById("projetosContainer").innerHTML += `
-                    <div class="card">
-                            <h1>${item.nome}</h1>
-                        <p>${item.descricao}</p>  
-                        <p>${item.fio}</p>
-                        <p>${item.agulha}</p>
-                        
 
-                    </div>
-                    `
-        });
+      async function buscarEExibirProjetos() {
+    document.getElementById("projetosContainer").innerHTML = '';
+    document.getElementById("projetosContainerFinalizados").innerHTML = '';
+
+    const idUsuario = sessionStorage.ID_USUARIO;
+
+    if (!idUsuario) {
+        console.error("ID do usuário não encontrado na sessão.");
+        return;
     }
 
-    </script>
+    try {
+
+        const resposta = await fetch(`/projetos/porUsuario/${idUsuario}`, { 
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!resposta.ok) {
+
+            if (resposta.status === 204) {
+                document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';
+                return; // Sai da função, não há projetos para exibir
+            }
+            throw new Error(`Erro ao buscar projetos: ${resposta.statusText}`);
+        }
+
+        const projetosDoUsuario = await resposta.json();
+        sessionStorage.PROJETOS_USUARIO = JSON.stringify(projetosDoUsuario);
+        for(let i = 0; i < projetosDoUsuario.length; i++){
+          projeto=projetosDoUsuario[i]
+          if(projeto.estado != "finalizado"){
+            document.getElementById("projetosContainer").innerHTML += `
+<div class="card">
+  <div class="imagem"><img src="img/varias caixas de trico com projetos inacabados.jpg"></div>
+  <div class="descricao">
+    <h3>${projeto.nome}</h3>
+    <p>${projeto.descricao}</p>
+  </div>
+  <div class="detalhes">
+    <h3>${projeto.nome}</h3>
+    <p>${projeto.descricao}</p>
+    <p>Fio utilizado: ${projeto.fio}</p>
+    <p>Agulha utilizada: ${projeto.agulha}</p>
+    <p>Status do projeto: ${projeto.estado}</p>
+    <div class="botoes">
+      <button onclick="atualizarestado(${projeto.id})" id="concluir">Concluir</button>
+      <button onclick="excluir(${projeto.id})" id="excluir">Excluir</button>
+    </div>
+  </div>
+</div>
+`
+        }
+        else{
+          document.getElementById("projetosContainerFinalizados").innerHTML += `
+<div class="card">
+  <div class="imagem"><img src="img/varias caixas de trico com projetos inacabados.jpg"></div>
+  <div class="descricao">
+    <h3>${projeto.nome}</h3>
+    <p>${projeto.descricao}</p>
+  </div>
+  <div class="detalhes">
+    <h3>${projeto.nome}</h3>
+    <p>${projeto.descricao}</p>
+    <p>Fio utilizado: ${projeto.fio}</p>
+    <p>Agulha utilizada: ${projeto.agulha}</p>
+    <p>Status do projeto: ${projeto.estado}</p>
+    <div class="botoes">
+      <button onclick="excluir(${projeto.id})" id="excluir">Excluir</button>
+    </div>
+  </div>
+</div>
+`
+          }
+
+      };
+    } catch (erro) {
+        console.error("Erro ao buscar projetos:", erro);
+        document.getElementById("projetosContainer").innerHTML = '<p>Erro ao carregar projetos. Tente novamente mais tarde.</p>';
+    }
+}
+function excluir(id){
+  if (confirm("Tem certeza que deseja excluir este projeto?")) {
+    fetch(`/projetos/deletar/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(function(resposta){
+      if(resposta.ok){
+        alert("Projeto excluído com sucesso!")
+        window.location.reload()
+      }else{
+        alert("Houve um erro ao excluir o projeto")
+      }
+    })
+  }
+}
+function atualizarestado(id){
+  fetch(`/projetos/atualizar/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      estadoServer: "finalizado"
+    })
+  })
+  .then(function(resposta){
+    if(resposta.ok){
+      alert("Projeto atualizado com sucesso!")
+      window.location.reload()
+    }else{
+      alert("Houve um erro ao atualizar o projeto")
+    }
+  })
+}
+
+    
+
+  </script>
