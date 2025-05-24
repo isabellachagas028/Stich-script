@@ -100,23 +100,24 @@
     let agulhavar=ipt_agulha.value
     let estadovar=select_estado.value
     let datavar=ipt_data.value
-    let imagem=ipt_imagem.value
+    let foto=ipt_imagem.files[0]
     let usuario=sessionStorage.ID_USUARIO
-    //Mandar os dados do formulario para o backend
+
+    const formData = new FormData();
+    formData.append('nomeServer', nomevar);
+    formData.append('descricaoServer', descricaovar);
+    formData.append('fioServer', fiovar);
+    formData.append('agulhaServer', agulhavar);
+    formData.append('estadoServer', estadovar);
+    formData.append('dataServer', datavar);
+    formData.append('fkUsuarioServer', usuario);
+    formData.append('foto', foto); //
+    
+
+    
     fetch("/projetos/cadastrar", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-      nomeServer: nomevar,
-      descricaoServer: descricaovar,
-      fioServer:fiovar,
-      agulhaServer: agulhavar,
-      estadoServer: estadovar,
-      dataServer: datavar,
-      fkUsuarioServer: usuario
-      })
+      body: formData
     })
     .then(function(resposta){
       console.log("resposta: ", resposta);
@@ -179,7 +180,7 @@
           if(projeto.estado != "finalizado"){
             document.getElementById("projetosContainer").innerHTML += `
 <div class="card">
-  <div class="imagem"><img src="img/varias caixas de trico com projetos inacabados.jpg"></div>
+  <div class="imagem"><img src="/assets/${projeto.imagem}"></div>
   <div class="descricao">
     <h3>${projeto.nome}</h3>
     <p>${projeto.descricao}</p>
@@ -201,7 +202,7 @@
         else{
           document.getElementById("projetosContainerFinalizados").innerHTML += `
 <div class="card">
-  <div class="imagem"><img src="img/varias caixas de trico com projetos inacabados.jpg"></div>
+  <div class="imagem"><img src="/assets/${projeto.imagem}"></div>
   <div class="descricao">
     <h3>${projeto.nome}</h3>
     <p>${projeto.descricao}</p>
@@ -245,7 +246,7 @@ function excluir(id){
   }
 }
 function atualizarestado(id){
-  fetch(`/projetos/atualizar/${id}`, {
+  fetch(`/projetos/atualizarestado/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"

@@ -20,16 +20,16 @@ function buscarProjetosPorUsuario(req, res) {
 
 function cadastrar(req, res) {
   // Extrair os dados do corpo da requisição
-  var nome = req.body.nomeServer;
-  var descricao = req.body.descricaoServer;
-  var fio = req.body.fioServer;
-  var dt_inicio = req.body.dataServer; // Assumindo que 'dataServer' é a data de início
-  var agulha = req.body.agulhaServer;
-  var estado = req.body.estadoServer;
-
+  let nome = req.body.nomeServer;
+  let descricao = req.body.descricaoServer;
+  let fio = req.body.fioServer;
+  let dt_inicio = req.body.dataServer; // Assumindo que 'dataServer' é a data de início
+  let agulha = req.body.agulhaServer;
+  let estado = req.body.estadoServer;
   var fkUsuario = req.body.fkUsuarioServer;
+  var caminhoImagem = req.file ? req.file.filename : null;
 
-  // Realizar as validações dos valores recebidos
+
   if (nome == undefined) {
     res.status(400).send("O nome do projeto está indefinido!");
   } else if (descricao == undefined) {
@@ -45,10 +45,8 @@ function cadastrar(req, res) {
   }else if (fkUsuario == undefined) {
     res.status(400).send("O ID do usuário (fkUsuario) está indefinido!");
   } else {
-    // Se todas as validações passaram, chamar o método de cadastro no model
-    // IMPORTANTE: VERIFIQUE A ORDEM E QUANTIDADE DOS PARÂMETROS
-    // NO SEU projetoModel.cadastrar NO ARQUIVO ../models/projetoModel.js
-    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,fkUsuario)
+
+    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,caminhoImagem,fkUsuario)
       .then(
         function (resultado) {
           res.json(resultado);
@@ -67,7 +65,7 @@ function cadastrar(req, res) {
 }
 function deletar(req, res) {
   // Extrair os dados do corpo da requisição
-  var idProjeto = req.params.idProjeto;
+  let idProjeto = req.params.idProjeto;
 
   // Realizar as validações dos valores recebidos
   if (idProjeto == undefined) {
@@ -93,8 +91,8 @@ function deletar(req, res) {
 }
 function atualizarestado(req, res) {
   // Extrair os dados do corpo da requisição
-  var idProjeto = req.params.idProjeto;
-  var estado = req.body.estadoServer;
+  let idProjeto = req.params.idProjeto;
+  let estado = req.body.estadoServer;
 
   // Realizar as validações dos valores recebidos
   if (idProjeto == undefined) {
