@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
             <div id="navbar" class="header"> 
         <img src="img/logoBranco.png" alt="">
         <div class="navbar">
@@ -31,9 +31,12 @@
            
         </div>
         <div class="direita">
-            <img src="img/hero2.png">
+            <img src="img/figurabanner2 (800 x 800 px).png">
         </div>
     </div>
+        <div class="respiro">
+     
+        </div>
     <div class="banner2">
 
         <div class="texto">
@@ -43,9 +46,50 @@
                <img src="img/figurabanner2 (1).png">
 
     </div>
+
     <div class="banner3">
+        <h1>Benefícios do artesanato</h1>
+        <div class="cardsbeneficio">
+            <div class="card">
+                <img src="img/1 - cópia.png" alt="">
+                <h3>Redução do estresse</h3>
+                <p>O foco nas repetições e nos detalhes ajuda a acalmar a mente. Promovendo relaxamento e mindfulness</p>
+        </div>
+            <div class="card">
+                <img src="img/2 - cópia.png" alt="">
+                <h3>Desenvolvimento de habilidades</h3>
+                <p>O artesanato é uma forma de expressão criativa que ajuda a desenvolver habilidades motoras e cognitivas.</p>
+            </div>
+            <div class="card">
+                <img src="img/imagem4.png" alt="">
+                <h3>Conexão social</h3>
+                <p>O artesanato promove as técnicas passadas entre gerações que fortalecem vínculos.</p>
+            </div>
+            <div class="card">
+                <img src="img/3.png" alt="">
+                <h3>Autoconfiança</h3>
+                <p>Proporciona orgulho e satisfação ao ver algo feito pelas próprias mãos. Traz sensasão de realização</p>
+        
 
     </div>
+    </div>
+    </div>
+    <div class="banner4">
+            <div class="container">
+        <div class="carrosel">
+            <div onclick="mostrartrico()" class="carrosel-item"><img src="img/mulher-em-casa-tricotando-de-perto_23-2148923322.jpg" alt="" srcset=""></div>
+            <div class="carrosel-item"><img src="img/croche-adulto-jovem-de-alto-angulo-em-casa_23-2149299507.avif"></div>
+            <div class="carrosel-item">Item 3</div>
+            <div class="carrosel-item">Item 4</div>
+        </div>
+    </div>
+    <div class="texto">
+        <h1>Conheça mais sobre diferentes técnicas</h1>
+        <div id="div_tecnica" class="tecnica">
+        </div>
+    </div>
+
+
 
     
 </body>
@@ -59,5 +103,22 @@
     navbar.classList.remove('navbar-scrolled');
   }
 });
+function mostrarcroche(){
+
+}
+function mostrartrico(){
+    const divTecnica = document.getElementById('div_tecnica');
+    divTecnica.innerHTML = `
+        <h2>Tricô</h2>
+        <p>O tricô é uma técnica de artesanato que utiliza duas agulhas para criar malhas entrelaçadas com fios. É uma forma popular de criar roupas, acessórios e itens decorativos.</p>
+    `;
+
+}
+function mostrarbordado(){
+
+}
+function mostrarmacrame(){
+
+}
 
 </script>
