@@ -267,6 +267,7 @@ font-family: "Tuffy";
   }
   .formulario input[type="text"],
   .formulario input[type="date"],
+  .formulario input[type="number"],
   .formulario select,
   .formulario input[type="file"] {
     width: 80%;
@@ -348,4 +349,15 @@ font-family: "Tuffy";
     color: #1a1a1a;
     font-weight: 500;
     font-family: "quicksand";
+  }
+  .tecnica{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffd5;
+    border-radius: 10px;
+    padding: 20px;
   }

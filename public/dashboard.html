@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+    </style>
+
+    <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+     <div class="sidebar">
+    <div class="perfil">
+      <img src="img/iconeperfil.png" id="img-perfil">
+      <p class="text">Olá <span id="b_usuario">usuário</span>!
+      </p>
+
+    </div>
+
+    <a href="index.html">
+      <i class="fa-solid fa-house"></i><span class="text"> Início</span>
+    </a>
+    <a href="projetos.html">
+      <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
+    </a>
+    <a href="dashboard.html">
+      <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
+    </a>
+
+  </div>
+  <div class="main">
+    <div class="kpis">
+        <div class="kpi" id="div_kpi1">
+            
+        </div>
+        <div class="kpi" id="div_kpi2">
+
+        </div>
+        <div class="kpi" id="div_kpi3"></div>
+
+    </div>
+  </div>
+</body>
+</html>
+<script>
+    window.onload=exibirProjetosFinalizados(),exibirProjetosAndamento()
+
+ function exibirProjetosFinalizados(){
+   const projetos= JSON.parse(sessionStorage.PROJETOS_USUARIO) 
+           let projetosfinalizados=0
+   for(let i= 0;i<projetos.length;i++){
+
+    console.log (projetos[i])
+    if(projetos[i].estado=="finalizado"){
+        projetosfinalizados++
+
+    }
+
+   }   console.log(projetosfinalizados)
+    div_kpi3.innerHTML+=`<h3>Projetos finalizados</h3>
+    <span>${projetosfinalizados}</span>`
+ }
+ function exibirProjetosAndamento(){
+      const projetos= JSON.parse(sessionStorage.PROJETOS_USUARIO) 
+           let projetosandamento=0
+   for(let i= 0;i<projetos.length;i++){
+
+    console.log (projetos[i])
+    if(projetos[i].estado=="iniciado"){
+        projetosandamento++
+
+    }
+
+   }   console.log(projetosandamento)
+    div_kpi1.innerHTML+=`<h3>Projetos em andamento</h3>
+    <span>${projetosandamento}</span>` 
+ }
+
+</script>

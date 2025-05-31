@@ -7,12 +7,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
             <div id="navbar" class="header"> 
         <img src="img/logoBranco.png" alt="">
         <div class="navbar">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Sobre nós</a></li>
+
 
             <li><a href="login.html">Login</a></li>
             <li><a href="cadastro.html">Cadastro</a></li>
@@ -31,9 +31,12 @@
            
         </div>
         <div class="direita">
-            <img src="img/hero2.png">
+            <img src="img/figurabanner2 (800 x 800 px).png">
         </div>
     </div>
+        <div class="respiro">
+     
+        </div>
     <div class="banner2">
 
         <div class="texto">
@@ -43,9 +46,68 @@
                <img src="img/figurabanner2 (1).png">
 
     </div>
+
     <div class="banner3">
+        <h1>Benefícios do artesanato</h1>
+        <div class="cardsbeneficio">
+            <div class="card">
+                <img src="img/1 - cópia.png" alt="">
+                <h3>Redução do estresse</h3>
+                <p>O foco nas repetições e nos detalhes ajuda a acalmar a mente. Promovendo relaxamento e mindfulness</p>
+        </div>
+            <div class="card">
+                <img src="img/2 - cópia.png" alt="">
+                <h3>Desenvolvimento de habilidades</h3>
+                <p>O artesanato é uma forma de expressão criativa que ajuda a desenvolver habilidades motoras e cognitivas.</p>
+            </div>
+            <div class="card">
+                <img src="img/imagem4.png" alt="">
+                <h3>Conexão social</h3>
+                <p>O artesanato promove as técnicas passadas entre gerações que fortalecem vínculos.</p>
+            </div>
+            <div class="card">
+                <img src="img/3.png" alt="">
+                <h3>Autoconfiança</h3>  
+                <p>Proporciona orgulho e satisfação ao ver algo feito pelas próprias mãos. Traz sensasão de realização</p>
+        
 
     </div>
+    </div>
+    </div>
+    <div class="banner4">
+    <h1>Conheça mais sobre diferentes técnicas</h1>
+    <div class ="tecnicas">
+<section class="container">
+    <div class="slider-wrapper">
+        <div class="slider">
+            <img id="slide-1" src="img/KnittingAngelaTong-scaled.jpg" >
+            <img id="slide-2" src="img/square-de-croche-quadradinho-da-vovo-7-cm-pct-5-artesanato-de-fuxico.jpg">
+            <img id="slide-3" src="img/bordado-1-q9f13w5jotdlghyugiz9hw58i0e8exugjxoxmwcnua.jpg">
+            <img id="slide-4" src="img/macrame-projeto-render-ce-unifor-800-selecao.webp">
+        </div>
+        <div class="slider-nav">
+            <a href="#slide-1"  onclick="mostrartrico()"></a>
+            <a href="#slide-2" onclick="mostrarcroche()"></a>  
+            <a href="#slide-3" onclick="mostrarbordado()"></a>
+            <a href="#slide-4" onclick="mostrarmacrame()"></a> 
+        </div>
+        </div>
+</section>
+
+
+
+
+
+    <div class="texto">
+
+        <div id="div_tecnica" class="tecnica">
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+
 
     
 </body>
@@ -59,5 +121,53 @@
     navbar.classList.remove('navbar-scrolled');
   }
 });
+function mostrartrico(){
+    const divTecnica = document.getElementById('div_tecnica');
+    divTecnica.classList.add('display-flex');
+    divTecnica.innerHTML = `
+        <h2>Tricô</h2>,
+        
+        <h3>O que é?</h3>
+        <div class="paragrafo">
+                 <p>O tricô é uma técnica de tecelagem manual ou com máquinas, que utiliza agulhas para entrelaçar fios e criar uma malha ou tecido. É uma atividade popular em todo o mundo, tanto como hobby como para a criação de peças de vestuário e artesanato. 
+O tricô produz um tecido de malha, que se caracteriza por sua flexibilidade, elasticidade e capacidade de esticar. 
+Existem diversos pontos de tricô, que permitem criar diferentes texturas e padrões nas peças. 
+ </p>
+ <img src="img/polaroidtrico.png" alt="">
+ </div>
+          `
+}
+function mostrarcroche(){
+    const divTecnica = document.getElementById('div_tecnica');
+    divTecnica.classList.add('display-flex');
+    divTecnica.innerHTML = `
+        <h2>Crochê</h2>
+        
+        <h3>O que é?</h3>
+        <div class="paragrafo">
+                 <p>O termo vem do germânico croc e do francês crochet, que significam "agulha".
+
+É uma técnica de tricotado manual em que se usa uma agulha para formar correntes com fios. Linhas muito finas podem ser usadas com agulhas muito delicadas e fios grossos com agulhas igualmente grossas.</p>
+<img src="img/polaroidcroche.png" alt="">
+            </div>
+            <h3>Que tipo de projetos posso fazer?</h3>
+        <div class="paragrafo">
+            
+<img src="img/polaroidcroche (1).png">
+
+        <p>
+O crochê oferece uma grande variedade de possibilidades. Se você faz malha plana, pode criar acessórios e roupas como blusas, blusas ou cobertores. Ao tricotar na circular, você pode dar volume e criar peças como o popular amigurumi, um estilo de crochê que se originou no Japão e em que são criados objetos tridimensionais.</p>
+
+   
+        
+    `;
+
+}
+function mostrarbordado(){
+
+}
+function mostrarmacrame(){
+
+}
 
 </script>
