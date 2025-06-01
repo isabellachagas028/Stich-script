@@ -19,13 +19,14 @@ function buscarProjetosPorUsuario(req, res) {
 }
 
 function cadastrar(req, res) {
-  // Extrair os dados do corpo da requisição
+
   let nome = req.body.nomeServer;
   let descricao = req.body.descricaoServer;
   let fio = req.body.fioServer;
-  let dt_inicio = req.body.dataServer; // Assumindo que 'dataServer' é a data de início
+  let dt_inicio = req.body.dataServer; 
   let agulha = req.body.agulhaServer;
   let estado = req.body.estadoServer;
+  var valor= req.body.valorServer
   var fkUsuario = req.body.fkUsuarioServer;
   var caminhoImagem = req.file ? req.file.filename : null;
 
@@ -34,7 +35,7 @@ function cadastrar(req, res) {
     res.status(400).send("O nome do projeto está indefinido!");
   } else if (descricao == undefined) {
     res.status(400).send("A descrição do projeto está indefinida!");
-  } else if (fio == undefined) { // Validação para 'fio'
+  } else if (fio == undefined) {
     res.status(400).send("O fio do projeto está indefinido!");
   } else if (dt_inicio == undefined) {
     res.status(400).send("A data de início do projeto está indefinida!");
@@ -42,11 +43,12 @@ function cadastrar(req, res) {
     res.status(400).send("A agulha do projeto está indefinida!");
   } else if (estado == undefined) {
     res.status(400).send("O estado do projeto está indefinido!");
-  }else if (fkUsuario == undefined) {
+  }
+  else if (fkUsuario == undefined) {
     res.status(400).send("O ID do usuário (fkUsuario) está indefinido!");
   } else {
 
-    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,caminhoImagem,fkUsuario)
+    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,caminhoImagem,fkUsuario, valor)
       .then(
         function (resultado) {
           res.json(resultado);
@@ -64,14 +66,14 @@ function cadastrar(req, res) {
   }
 }
 function deletar(req, res) {
-  // Extrair os dados do corpo da requisição
+
   let idProjeto = req.params.idProjeto;
 
-  // Realizar as validações dos valores recebidos
+
   if (idProjeto == undefined) {
     res.status(400).send("O ID do projeto está indefinido!");
   } else {
-    // Se todas as validações passaram, chamar o método de cadastro no model
+
     projetoModel.deletar(idProjeto)
       .then(
         function (resultado) {
@@ -90,21 +92,22 @@ function deletar(req, res) {
   }
 }
 function atualizarestado(req, res) {
-  // Extrair os dados do corpo da requisição
+  
   let idProjeto = req.params.idProjeto;
   let estado = req.body.estadoServer;
 
-  // Realizar as validações dos valores recebidos
+
   if (idProjeto == undefined) {
     res.status(400).send("O ID do projeto está indefinido!");
   } else if (estado == undefined) {
     res.status(400).send("O estado do projeto está indefinido!");
   } else {
-    // Se todas as validações passaram, chamar o método de cadastro no model
+
     projetoModel.atualizarestado(idProjeto, estado)
       .then(
         function (resultado) {
           res.json(resultado);
+          
         }
       ).catch(
         function (erro) {

@@ -64,7 +64,6 @@
         <p>Status do projeto</p>
         <select name="estado" id="select_estado">
           <option value="iniciado">Iniciado</option>
-    
           <option value="finalizado">Finalizado</option>
         </select>
         <p>Data em que foi iniciado</p>
@@ -95,33 +94,36 @@
 
   <script>
     function cadastrar(){
-    // Pegar os dados do formulario
+
     let nomevar=ipt_nome.value
     let descricaovar=ipt_descricao.value
     let fiovar=ipt_fio.value
     let agulhavar=ipt_agulha.value
     let estadovar=select_estado.value
     let datavar=ipt_data.value
+    let valorvar=Number(ipt_valor.value)
     let foto=ipt_imagem.files[0]
     let usuario=sessionStorage.ID_USUARIO
 
     const formData = new FormData();
-    formData.append('nomeServer', nomevar);
-    formData.append('descricaoServer', descricaovar);
-    formData.append('fioServer', fiovar);
-    formData.append('agulhaServer', agulhavar);
-    formData.append('estadoServer', estadovar);
-    formData.append('dataServer', datavar);
-    formData.append('fkUsuarioServer', usuario);
-    formData.append('foto', foto); //
+    formData.append('nomeServer', nomevar)
+    formData.append('descricaoServer', descricaovar)
+    formData.append('fioServer', fiovar)
+    formData.append('agulhaServer', agulhavar)
+    formData.append('valorServer', valorvar)
+    formData.append('estadoServer', estadovar)
+    formData.append('dataServer', datavar)
+    formData.append('fkUsuarioServer', usuario)
+    formData.append('foto', foto)
     
-
+   
     
     fetch("/projetos/cadastrar", {
       method: "POST",
       body: formData
     })
     .then(function(resposta){
+
       console.log("resposta: ", resposta);
       if(resposta.ok){
         alert("Projeto cadastrado com sucesso!")
@@ -146,37 +148,28 @@
     console.log(sessionStorage.PROJETOS_USUARIO)
 
 
-      async function buscarEExibirProjetos() {
-    document.getElementById("projetosContainer").innerHTML = '';
-    document.getElementById("projetosContainerFinalizados").innerHTML = '';
+    function buscarEExibirProjetos() {
+    document.getElementById("projetosContainer").innerHTML = ''
+    document.getElementById("projetosContainerFinalizados").innerHTML = ''
 
     const idUsuario = sessionStorage.ID_USUARIO;
 
+    fetch(`/projetos/porUsuario/${idUsuario}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (projetosDoUsuario) {
+                    sessionStorage.PROJETOS_USUARIO = JSON.stringify(projetosDoUsuario);
 
-    try {
+                    if (projetosDoUsuario.length === 0) {
+                        document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';
+                        return;
+                    }
 
-        const resposta = await fetch(`/projetos/porUsuario/${idUsuario}`, { 
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+                    for (let i = 0; i < projetosDoUsuario.length; i++) {
+                        const projeto = projetosDoUsuario[i];
 
-        if (!resposta.ok) {
-
-            if (resposta.status === 204) {
-                document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';
-                return; // Sai da função, não há projetos para exibir
-            }
-            throw new Error(`Erro ao buscar projetos: ${resposta.statusText}`);
-        }
-
-        const projetosDoUsuario = await resposta.json();
-        sessionStorage.PROJETOS_USUARIO = JSON.stringify(projetosDoUsuario);
-        for(let i = 0; i < projetosDoUsuario.length; i++){
-          projeto=projetosDoUsuario[i]
-          if(projeto.estado != "finalizado"){
-            document.getElementById("projetosContainer").innerHTML += `
+                        if (projeto.estado != "finalizado") {
+                            document.getElementById("projetosContainer").innerHTML += `
 <div class="card">
   <div class="imagem"><img src="/assets/${projeto.imagem}"></div>
   <div class="descricao">
@@ -189,16 +182,16 @@
     <p>Fio utilizado: ${projeto.fio}</p>
     <p>Agulha utilizada: ${projeto.agulha}</p>
     <p>Status do projeto: ${projeto.estado}</p>
+    <p>Valor gasto:${projeto.valor}</p>
     <div class="botoes">
       <button onclick="atualizarestado(${projeto.id})" id="concluir">Concluir</button>
       <button onclick="excluir(${projeto.id})" id="excluir">Excluir</button>
     </div>
   </div>
 </div>
-`
-        }
-        else{
-          document.getElementById("projetosContainerFinalizados").innerHTML += `
+`;
+                        } else {
+                            document.getElementById("projetosContainerFinalizados").innerHTML += `
 <div class="card">
   <div class="imagem"><img src="/assets/${projeto.imagem}"></div>
   <div class="descricao">
@@ -211,20 +204,27 @@
     <p>Fio utilizado: ${projeto.fio}</p>
     <p>Agulha utilizada: ${projeto.agulha}</p>
     <p>Status do projeto: ${projeto.estado}</p>
+        <p>Valor gasto:${projeto.valor}</p>
     <div class="botoes">
       <button onclick="excluir(${projeto.id})" id="excluir">Excluir</button>
     </div>
   </div>
 </div>
-`
-          }
-
-      };
-    } catch (erro) {
-        console.error("Erro ao buscar projetos:", erro);
-        document.getElementById("projetosContainer").innerHTML = '<p>Nada por enquando, que tal começar um projeto novo?</p>';
-    }
+`;
+                        }
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                document.getElementById("projetosContainer").innerHTML = '<p>Nada por enquanto, que tal começar um projeto novo?</p>';
+            }
+        })
+        .catch(function (erro) {
+            console.error(`Erro na obtenção dos dados: ${erro.message}`);
+            document.getElementById("projetosContainer").innerHTML = '<p>Erro ao carregar os projetos.</p>';
+        });
 }
+
 function excluir(id){
   if (confirm("Tem certeza que deseja excluir este projeto?")) {
     fetch(`/projetos/deletar/${id}`, {

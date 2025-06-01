@@ -107,7 +107,8 @@ background-color: rgb(251, 249, 247); }
     flex-direction: column;
     background-color: rgb(255, 255, 255);
     border: solid rgb(174, 174, 174) 4px;
-    width: 25%;
+    width: 27%;
+    justify-items:start;
 
     min-height: 500px;
     border-radius: 10px;
@@ -154,7 +155,7 @@ display: flex;
     margin: 10px;
   }
 .card .imagem{
-    margin-top: 20px;
+
     border-radius: 10px;
     align-self: center;
     width: 330px;
