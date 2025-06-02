@@ -128,17 +128,20 @@ function plotarGraficoBarrasMesProjetos() {
     const projetosconcluidos = [];
 
     for (let i = 0; i < projetos.length; i++) {
+    
         const projeto = projetos[i];
         const data = new Date(projeto.dt_inicio);
         const mesAno = `${data.getMonth() + 1}/${data.getFullYear()}`;
-        const projetoconcluido = projetosfinalizados
-        const indice = meses.indexOf(mesAno);
+        if(projeto.estado=="finalizado"){
+             const indice = meses.indexOf(mesAno);
         if (indice=== -1) {
             meses.push(mesAno);
-            projetosconcluidos.push(projetoconcluido);
+            projetosconcluidos.push(1);
         } else {
-            projetosconcluidos[indice] += projetoconcluido;
+            projetosconcluidos[indice] += 1;
         }
+        }
+     
     }
   graficodavez= new Chart(document.getElementById('graficoBarras'), {
         type: 'bar',
