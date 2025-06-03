@@ -333,17 +333,31 @@ gap: 10px    ;}
     display: flex;
 
 }
+.tecnicas h2{
+    font-family: 'Volkhov', serif;
+    font-size: 40px;
+    color: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
 .tecnica .paragrafo{
 display: flex;
 flex-direction: row;
+font-size: 20px;
+font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .tecnica h3{
 align-self: flex-start;
+    font-size: 30px;
+    font-family: 'Volkhov', serif;
+    color: #6165b8;
+    margin-bottom: 10px;
+    text-align: center;
 }
 .tecnica img{
     width: auto;
     height: 300px;
 }
-.paragrafo p{
+.paragrafo {
 
 }

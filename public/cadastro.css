@@ -115,7 +115,7 @@ body , html{
 .texto p{
     font-size: 20px;
     margin-bottom: 20px;
-    color: #ffffff;
+    color: #000000;
 }
 .inputBox input{
     width: 90%;
@@ -147,4 +147,42 @@ label{
 .inputBox button:hover{
     scale: 1.05;
     transition: 0.3s;
+}
+.alerta_erro{
+width: 100%;
+  height: 100%;
+  display: none ;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.card_erro {
+  display:none;
+  background-color: #fff;
+  color: black;
+  width: 400px;
+  height: fit-content;
+  position: fixed;
+  border-radius: 4px;
+  border: #915bca 3px solid;
+  padding: 10px;
+
+}
+.card_erro p{
+    font-size: 25px;
+    margin: 0;
+    color: #000000;
+}
+.card_erro img {
+  width: 200px;
+  height: 200px;
+}
+
+.card_erro #mensagem_erro{
+  font-weight: 500;
+  font-size: 20px;
 }

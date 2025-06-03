@@ -85,9 +85,9 @@
 <section class="container">
     <div class="slider-wrapper">
         <div class="slider">
-            <img id="slide-1" src="img/KnittingAngelaTong-scaled.jpg" >
+            <img id="slide-1" src="img/wiptrico.jpg" >
             <img id="slide-2" src="img/square-de-croche-quadradinho-da-vovo-7-cm-pct-5-artesanato-de-fuxico.jpg">
-            <img id="slide-3" src="img/bordado-1-q9f13w5jotdlghyugiz9hw58i0e8exugjxoxmwcnua.jpg">
+            <img id="slide-3" src="img/imagembordado.jpg">
             <img id="slide-4" src="img/macrame-projeto-render-ce-unifor-800-selecao.webp">
         </div>
         <div class="slider-nav">
@@ -98,6 +98,7 @@
         </div>
         </div>
 </section>
+
 
 
 
@@ -132,7 +133,7 @@ function mostrartrico(){
     const divTecnica = document.getElementById('div_tecnica');
     divTecnica.classList.add('display-flex');
     divTecnica.innerHTML = `
-        <h2>Tricô</h2>,
+        <h2>Tricô</h2>
         
         <h3>O que é?</h3>
         <div class="paragrafo">
@@ -142,6 +143,11 @@ Existem diversos pontos de tricô, que permitem criar diferentes texturas e padr
  </p>
  <img src="img/polaroidtrico.png" alt="">
  </div>
+ <h3>O que posso fazer?</h3>
+ <div class="paragrafo">
+    <img src="img/polaroidtrico (1).png">
+    <p>Com tricô, pode-se criar uma grande variedade de peças, desde itens simples como cachecóis e toucas até peças mais elaboradas como suéteres, casacos, meias, e até mesmo itens de decoração para a casa. É possível também personalizar peças com diferentes pontos e cores, e até mesmo combinar o tricô com outras técnicas como crochê. </p>
+    </div>
           `
 }
 function mostrarcroche(){
@@ -171,10 +177,52 @@ O crochê oferece uma grande variedade de possibilidades. Se você faz malha pla
 
 }
 function mostrarbordado(){
+    const divTecnica = document.getElementById('div_tecnica');
+    divTecnica.classList.add('display-flex');
+    divTecnica.innerHTML = `
+        <h2>Bordado</h2>
+        
+        <h3>O que é?</h3>
+        <div class="paragrafo">
+                 <p>O bordado é uma técnica artesanal que utiliza fios e agulhas para ornamentar tecidos, normalmente com desenhos e letras. É uma das formas artísticas mais antigas, sendo perpetuada por diversas civilizações e se tornando até mesmo identidade de certos povos.</p>
+<img src="img/polaroidbordado.png" alt="">
+            </div>
+            <h3>Que tipo de projetos posso fazer?</h3>
+        <div class="paragrafo">
+            
+<img src="img/polaroidbordado (1).png">
+
+        <p>
+É possível criar quadros, almofadas, toalhas, toalhas de mesa, e até mesmo relógios com bordado, além de personalizar roupas e acessórios como bolsas e chapéus. </p>
+
+   
+        
+    `;
 
 }
 function mostrarmacrame(){
+    const divTecnica = document.getElementById('div_tecnica');
+    divTecnica.classList.add('display-flex');
+    divTecnica.innerHTML = `
+        <h2>Macramé</h2>
+        
+        <h3>O que é?</h3>
+        <div class="paragrafo">
+                 <p>Macramé é uma técnica de tecelagem manual que utiliza nós para criar peças como painéis, cortinas, suportes para plantas e até bijuterias. A técnica consiste em amarrar e entrelaçar fios em nós decorativos, sem o uso de agulhas ou máquinas. 
+</p>
+<img src="img/polaroidmacrame.png" alt="">
+            </div>
+            <h3>Que tipo de projetos posso fazer?</h3>
+        <div class="paragrafo">
+            
+<img src="img/polaroidmacrame (1).png">
 
+        <p>
+ Você pode fazer suportes de plantas, painéis de parede, almofadas, bolsas, bijuterias, cortinas e muito mais, usando nós decorativos para formar franjas, padrões geométricos ou formas tridimensionais.  </p>
+
+   
+        
+    `;
 }
 
 </script>
