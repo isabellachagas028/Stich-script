@@ -6,7 +6,7 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 // A sintaxe do operador ternário é: condição ? valor_se_verdadeiro : valor_se_falso
 
 require("dotenv").config({ path: caminho_env });
-
+const Swal = require('sweetalert2')
 var express = require("express");
 var cors = require("cors");
 var path = require("path");

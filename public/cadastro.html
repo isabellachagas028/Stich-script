@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
       <link rel="stylesheet" href="cadastro.css">
+      <script src="js/sessao.js"></script>
   </head>
   <body>
       <div id="navbar" class="header"> 
@@ -38,18 +39,40 @@
                       <input type="password" id="ipt_senha_confirma" placeholder="Digite sua senha novamente" >
                       <button onclick="cadastrar()">Cadastrar</button>
                       </div>
+                  <div class="validacao" id="div_validacao"></div>
+                  </div>
+                  </div>
 
                   </div>
+
+
+        <div id="div_erros_login"></div>
           
       
   </body>
   </html>
 <script>
    function cadastrar() {
+    div_validacao.innerHTML=""
     const nomeVar = ipt_nome.value;
     const emailVar = ipt_email.value;
     const senhaVar = ipt_senha.value;
-    const senha_confirmaVar = document.getElementById('ipt_senha_confirma');
+    const senha_confirmaVar = ipt_senha_confirma.value;
+        if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      senha_confirmaVar == "" 
+    ) {
+        div_validacao.innerHTML+=`
+        <p>⚠️Não deixe nenhum campo em branco⚠️</p>`
+        return
+    }
+    else if(senhaVar!=senha_confirmaVar){
+              div_validacao.innerHTML+=`
+        <p>⚠️Confirme a senha corretamente⚠️</p>`
+        return
+    }
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -80,6 +103,7 @@
           }, "4000");
 
           limparFormulario();
+          finalizarAguardar()
           
         ;
         } else {
@@ -92,6 +116,10 @@
       });
 
     return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
     }
 
 </script>

@@ -148,6 +148,9 @@ label{
     scale: 1.05;
     transition: 0.3s;
 }
+.loading-div{
+    display: none;
+}
 .alerta_erro{
 width: 100%;
   height: 100%;

@@ -46,6 +46,9 @@
             </div>
         </div>
 
+                          <div id="div_aguardar" class="loading-div">
+          <img src="./img/Animation - 1748968082206 (1).gif" id="loading-gif" >
+        </div>
 
     </div>
     <footer class="footer">
@@ -78,6 +81,7 @@
 <script>
 
     function entrar() {
+        aguardar();
 
 
         var emailVar = ipt_email.value;
@@ -85,16 +89,14 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display="flex";
-   
-
             mensagem_erro.innerHTML = `
             <img src="img/fotocardloginerro.png"><p>Insira seus dados, os campos estão em branco</p>`;
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -126,7 +128,7 @@
 
                     setTimeout(function () {
                         window.location = "projetos.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 3000); // apenas para exibir o loading
 
                 });
 
