@@ -2,8 +2,9 @@ var usuarioModel = require("../models/usuarioModel");
 var projetoModel = require("../models/projetoModel");
 
 function autenticar(req, res) {
-    var email = req.body.emailServer;
+    var email = req.body.emailServer
     var senha = req.body.senhaServer;
+
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
@@ -27,6 +28,7 @@ function autenticar(req, res) {
                                 id: resultadoAutenticar[0].usuarioID,
                                 email: resultadoAutenticar[0].email,
                                 nome: resultadoAutenticar[0].nome,
+                                imagem:resultadoAutenticar[0].imagem,
                                 projetos:resultadoProjetos
 
                             });
@@ -56,6 +58,7 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
+ var imagem= req.body.imagemPerfilServer
 
 
     // Faça as validações dos valores
@@ -69,7 +72,7 @@ function cadastrar(req, res) {
      else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha )
+        usuarioModel.cadastrar(nome, email, senha,imagem )
             .then(
                 function (resultado) {
                     res.json(resultado);

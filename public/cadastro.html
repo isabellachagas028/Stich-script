@@ -48,12 +48,36 @@
 
 
         <div id="div_erros_login"></div>
-          
+          <button onclick="testar()"></button>
       
   </body>
   </html>
-<script>
+<script> 
+
+ 
+
+
+
    function cadastrar() {
+  const NumeroAleatorio = Math.ceil(Math.random() * 5);
+  let imagemperfil=""
+    if(NumeroAleatorio==1){
+      imagemperfil="img/17.png"
+
+    }
+    else if(NumeroAleatorio==2){
+      imagemperfil="img/18.png"
+    }
+    else if(NumeroAleatorio==3){
+      imagemperfil="img/19.png"
+    }
+        else if(NumeroAleatorio==3){
+      imagemperfil="img/20.png"
+    }
+    else{
+            imagemperfil="img/21.png"
+    }
+console.log(imagemperfil)
     div_validacao.innerHTML=""
     const nomeVar = ipt_nome.value;
     const emailVar = ipt_email.value;
@@ -85,7 +109,8 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
-        senhaServer: senhaVar
+        senhaServer: senhaVar,
+        imagemPerfilServer:imagemperfil
       }),
     })
       .then(function (resposta) {

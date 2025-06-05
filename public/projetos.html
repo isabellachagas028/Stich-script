@@ -26,10 +26,9 @@
 
 
   <div class="sidebar">
-    <div class="perfil">
-      <img src="img/iconeperfil.png" id="img-perfil">
-      <p class="text">Olá <span id="b_usuario">usuário</span>!
-      </p>
+    <div class="perfil" id="perfil">
+
+
 
     </div>
 
@@ -98,6 +97,7 @@
 
 
   <script>
+
     function cadastrar(){
 
     let nomevar=ipt_nome.value
@@ -156,9 +156,11 @@
       const formulario = document.querySelector('.main-form');
       formulario.style.display = 'none';
     }
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    console.log(sessionStorage.ID_USUARIO);
-    console.log(sessionStorage.PROJETOS_USUARIO)
+
+    perfil.innerHTML+=` 
+      <img src="${sessionStorage.IMAGEM_USUARIO}"><br><p class="text">Olá <span id="b_usuario">${sessionStorage.NOME_USUARIO}</span>!<br>`
+         
+
 
 
     function buscarEExibirProjetos() {
@@ -172,7 +174,7 @@
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
                     console.log("AQUIII", resposta);
-
+                    sessionStorage.PROJETOS_USUARIO = JSON.stringify(resposta);
                     if (resposta.length === 0) {
                         document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';
                         return;

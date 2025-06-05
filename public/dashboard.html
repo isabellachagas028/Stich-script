@@ -18,9 +18,8 @@
 </head>
 <body>
      <div class="sidebar">
-    <div class="perfil">
-      <img src="img/iconeperfil.png" id="img-perfil">
-      <p class="text">Olá <span id="b_usuario">usuário</span>!
+    <div class="perfil" id="perfil">
+
       </p>
 
     </div>
@@ -73,6 +72,10 @@
 </body>
 </html>
 <script>
+  
+    perfil.innerHTML+=` 
+      <img src="${sessionStorage.IMAGEM_USUARIO}"><br><p class="text">Olá <span id="b_usuario">${sessionStorage.NOME_USUARIO}</span>!<br>`
+         
       b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   let projetosfinalizados=0
   let projetosandamento=0
@@ -85,18 +88,19 @@ function plotarGraficoBarrasMesValor() {
           graficodavez.destroy()
      }
 
-    const meses = [];
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     const valores = [];
+    const mesesAno = [];
 
     for (let i = 0; i < projetos.length; i++) {
         const projeto = projetos[i];
         const data = new Date(projeto.dt_inicio);
-        const mesAno = `${data.getMonth() + 1}/${data.getFullYear()}`;
+        const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
         const valor = Number(projeto.valor || 0)
 
-        const indice = meses.indexOf(mesAno);
+        const indice = mesesAno.indexOf(mesAno);
         if (indice=== -1) {
-            meses.push(mesAno);
+            mesesAno.push(mesAno);
             valores.push(valor);
         } else {
             valores[indice] += valor;
@@ -106,7 +110,7 @@ function plotarGraficoBarrasMesValor() {
     graficodavez= new Chart(document.getElementById('graficoBarras'), {
         type: 'bar',
         data: {
-            labels: meses,
+            labels: mesesAno,
             datasets: [{
                 label: 'Gastos (R$)',
                 data: valores,
@@ -130,18 +134,19 @@ function plotarGraficoBarrasMesProjetos() {
      }
 
 
-    const meses = [];
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     const projetosconcluidos = [];
-
+    const mesesAno = [];
     for (let i = 0; i < projetos.length; i++) {
     
         const projeto = projetos[i];
         const data = new Date(projeto.dt_inicio);
-        const mesAno = `${data.getMonth() + 1}/${data.getFullYear()}`;
+          const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
+        
         if(projeto.estado=="finalizado"){
              const indice = meses.indexOf(mesAno);
         if (indice=== -1) {
-            meses.push(mesAno);
+            mesesAno.push(mesAno);
             projetosconcluidos.push(1);
         } else {
             projetosconcluidos[indice] += 1;
@@ -152,7 +157,7 @@ function plotarGraficoBarrasMesProjetos() {
   graficodavez= new Chart(document.getElementById('graficoBarras'), {
         type: 'bar',
         data: {
-            labels: meses,
+            labels: mesesAno,
             datasets: [{
                 label: 'Projetos concluidos',
                 data: projetosconcluidos,
