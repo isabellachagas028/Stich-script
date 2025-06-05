@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <link rel="stylesheet" href="cadastro.css">
       <script src="js/sessao.js"></script>
   </head>
@@ -91,16 +92,18 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "flex";
-          alertaErro.style.display="flex";
+                  Swal.fire({
+        title: "Bem vindo!",
+        text: "Seu cadastro foi realizado com sucesso, seja bem vindo ao Stich&Script! Você será direcionado para tela de login em alguns segundos💜",
+     imageUrl: "/img/gifcadastro.gif",
+        imageWidth: 400,
 
-          mensagem_erro.innerHTML =
-            `<img src="img/fotocardcadastro.png">
-            <p>Cadastro realizado com sucesso! Redirecionando para tela de Login...</p>`;
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "4000");
+    
+      });    setTimeout(() => {
+        window.location="login.html"
+
+      }, "5000");
 
           limparFormulario();
           finalizarAguardar()

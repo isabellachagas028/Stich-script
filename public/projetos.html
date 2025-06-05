@@ -3,7 +3,7 @@
 <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
 
 <head>
-  <script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
@@ -55,7 +55,7 @@
   </div>
   <div class="main-form">
     <div class="containerform">
-      <form id="form" class="formulario">
+      <div id="form" class="formulario">
 
         <h1>Adicione um novo projeto</h1><button id="botaofechar" onclick="fecharformulario()">x</button>
         <p>Nome:</p>
@@ -78,7 +78,7 @@
         <p>Imagem do projeto</p>
         <input type="file" id="ipt_imagem">
         <button onclick="cadastrar()" id="btn_adicionar">Adicionar Projeto</button>
-      </form>
+      </div>
 
 
     </div>
@@ -89,10 +89,10 @@
  <button onclick="abrirformulario()" class="botaoadd" id="botaoadd">Adicionar projeto</button>
     <div class="container" id="projetosContainer">
       <h1>Projetos em andamento</h1>
+
     </div>
             <h1>Projetos finalizados</h1>
       <div class="container" id="projetosContainerFinalizados">
-
         </div>
 
 
@@ -130,9 +130,17 @@
     .then(function(resposta){
 
       console.log("resposta: ", resposta);
-      if(resposta.ok){
-        alert("Projeto cadastrado com sucesso!")
-        window.location.reload()
+      if(resposta.ok){ 
+        console.log("AQUI ENTROU OK");
+    Swal.fire({
+      title: "Projeto cadastrado!",
+      text: "Seu projeto foi cadastrado com sucesso, mãos a obra🫶.",
+      icon: "success",
+
+    });
+         setTimeout(() => {
+            window.location.reload()
+          }, "2000");
       }else{
         alert("Houve um erro ao cadastrar o projeto")
       }
@@ -162,16 +170,17 @@
     fetch(`/projetos/porUsuario/${idUsuario}`)
         .then(function (resposta) {
             if (resposta.ok) {
-                resposta.json().then(function (projetosDoUsuario) {
-                    sessionStorage.PROJETOS_USUARIO = JSON.stringify(projetosDoUsuario);
+                resposta.json().then(function (resposta) {
+                    console.log("AQUIII", resposta);
 
-                    if (projetosDoUsuario.length === 0) {
+                    if (resposta.length === 0) {
                         document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';
                         return;
+                        
                     }
 
-                    for (let i = 0; i < projetosDoUsuario.length; i++) {
-                        const projeto = projetosDoUsuario[i];
+                    for (let i = 0; i < resposta.length; i++) {
+                        const projeto = resposta[i];
 
                         if (projeto.estado != "finalizado") {
                             document.getElementById("projetosContainer").innerHTML += `
@@ -231,8 +240,18 @@
 }
 
 function excluir(id){
-  if (confirm("Tem certeza que deseja excluir este projeto?")) {
-    fetch(`/projetos/deletar/${id}`, {
+Swal.fire({
+  title: "Tem certeza que deseja exluir este projeto?",
+  text: "Você não será capaz de reverter esta ação, e esse projeto não contabilizara como projeto concluido",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  cancelButtonText:"Cancelar",
+  confirmButtonText: "Sim, quero deletar!"
+}).then((result) => {
+  if (result.isConfirmed) {  
+      fetch(`/projetos/deletar/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -240,14 +259,29 @@ function excluir(id){
     })
     .then(function(resposta){
       if(resposta.ok){
-        alert("Projeto excluído com sucesso!")
-        window.location.reload()
+    Swal.fire({
+      title: "Deletado!",
+      text: "Seu projeto foi deletado com sucesso.",
+      icon: "success",
+
+    });
+             setTimeout(() => {
+            window.location.reload()
+          }, "2000");
+
       }else{
         alert("Houve um erro ao excluir o projeto")
       }
     })
+
   }
+    
+})
+
 }
+
+
+
 function atualizarestado(id){
   fetch(`/projetos/atualizarestado/${id}`, {
     method: "PUT",
@@ -260,8 +294,18 @@ function atualizarestado(id){
   })
   .then(function(resposta){
     if(resposta.ok){
-      alert("Projeto atualizado com sucesso!")
-      window.location.reload()
+      Swal.fire({
+        title: "Projeto concluído!",
+        text: "Parabéns por concluir mais um projeto, Sabemos que não é fácil, mas você conseguiu!",
+     imageUrl: "img/gifconcuiu.gif",
+        imageWidth: 400,
+
+
+    
+      });
+      setTimeout(() => {
+        window.location.reload()
+      }, "10000");
     }else{
       alert("Houve um erro ao atualizar o projeto")
     }

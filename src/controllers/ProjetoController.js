@@ -8,7 +8,7 @@ function buscarProjetosPorUsuario(req, res) {
       if (resultado.length > 0) {
         res.status(200).json(resultado);
       } else {
-        res.status(204).json([]);
+        res.status(204).send("Nenhum resultado encontrado!");
       }
     })
     .catch(function (erro) {
@@ -113,7 +113,7 @@ function atualizarestado(req, res) {
         function (erro) {
           console.log(erro);
           console.log(
-            "\nHouve um erro ao realizar a atualização do estado do projeto! Erro: ",
+            "Houve um erro ao realizar a atualização do estado do projeto! Erro: ",
             erro.sqlMessage
           );
           res.status(500).json(erro.sqlMessage);

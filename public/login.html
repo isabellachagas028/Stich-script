@@ -7,7 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="login.css">
     <script src="js/sessao.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="icon" href="./assets/icon/favicon2.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -57,21 +57,7 @@
                 <img src="img/logoBranco.png" alt="Logo Stitch and Script">
                 <p>Stitch and Script © 2025<br>Todos os direitos reservados.</p>
             </div>
-            <div class="footer-links">
-                <h3>Links úteis</h3>
-                <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Sobre nós</a></li>
-                    <li><a href="#">Contato</a></li>
-                    <li><a href="#">Política de Privacidade</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h3>Redes sociais</h3>
-                <a href="#"><img src="img/icon-instagram.png" alt="Instagram" /></a>
-                <a href="#"><img src="img/icon-facebook.png" alt="Facebook" /></a>
-                <a href="#"><img src="img/icon-twitter.png" alt="Twitter" /></a>
-            </div>
+
         </div>
     </footer>
 
@@ -87,11 +73,20 @@
         var emailVar = ipt_email.value;
         var senhaVar = ipt_senha.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display="flex";
-            mensagem_erro.innerHTML = `
-            <img src="img/fotocardloginerro.png"><p>Insira seus dados, os campos estão em branco</p>`;
-      finalizarAguardar();
+        if (emailVar == "" || senhaVar == "") {      finalizarAguardar();
+                  Swal.fire({
+        title: "Campos em branco!",
+        text: "Insira seus dados!",
+     imageUrl: "img/fotocardloginerro.png",
+        imageWidth: 400,
+
+
+    
+      });      setTimeout(() => {
+        window.location.reload()
+      }, "10000");
+
+
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -135,12 +130,18 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
-          cardErro.style.display="flex";
+                  Swal.fire({
+        title: "Confira seus dados!",
+        text: "Não estamos te achando em nosso banco de dados, verifique se o email e a senha estão corretos.",
+     imageUrl: "img/erroo senha.png",
+        imageWidth: 400,
 
-            mensagem_erro.innerHTML = `
-        <img src="img/erroo senha.png">
-            <p>Confira se os seus dados estão corretos, estamos te procurando...</p>`
-                   setInterval(sumirMensagem, 5000);
+
+    
+      });      setTimeout(() => {
+        window.location.reload()
+      }, "10000");
+
             finalizarAguardar();
             return false;
                 resposta.text().then(texto => {
