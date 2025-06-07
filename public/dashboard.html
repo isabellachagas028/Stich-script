@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="dashboard.css">
-        <link rel="icon" href="img/iconesite.ico">
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="icon" href="img/iconesite.ico">
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  </style>
+  <script src="js/sessao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    </style>
-    <script src="js/sessao.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-    <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-     <div class="sidebar">
+  <div class="sidebar">
     <div class="perfil" id="perfil">
 
       </p>
@@ -39,74 +40,84 @@
     <a href="#">
       <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
     </a>
-        <a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket"></i>
+    <a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket"></i>
       <span class="text">Sair</span>
-      </a>
+    </a>
 
   </div>
   <div class="main">
     <div class="kpis">
-        <div class="kpi" id="div_kpi1">
-            
-        </div>
-        <div class="kpi" id="div_kpi2">
+      <div class="kpi" id="div_kpi1">
 
-        </div>
-        <div class="kpi" id="div_kpi3"></div>
+      </div>
+      <div class="kpi" id="div_kpi2">
+
+      </div>
+      <div class="kpi" id="div_kpi3"></div>
 
     </div>
     <div class="container">
 
-    <div class="graficos">
-    
-    <div class="containerGraficoPizza">
-      <canvas id="graficoPizza"></canvas>
-    </div>  
+      <div class="graficos">
 
-    <div class="containerGraficoBarrasMes"> 
-      <div class="botoes">         <button class="botaografico" onclick="plotarGraficoBarrasMesValor()">Gastos por mes</button><button class="botaografico" onclick="plotarGraficoBarrasMesProjetos()">Projetos finalizados por mes</button>
-</div>
-      <canvas id="graficoBarras"></canvas>
+        <div class="containerGraficoPizza">
+          <canvas id="graficoPizza"></canvas>
+        </div>
 
-    </div>
-    </div>
-    <div class="ranking">
-      <h2>Ranking</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Posição</th>
-            <th>Usuário</th>
-            <th>Projetos Finalizados</th>
-          </tr>
-        </thead>
-        <tbody id="bodyranking">
+        <div class="containerGraficoBarrasMes">
+          <div class="botoes"> <button class="botaografico" onclick="plotarGraficoBarrasMesValor()">Gastos por
+              mes</button><button class="botaografico" onclick="plotarGraficoBarrasMesProjetos()">Projetos finalizados
+              por mes</button>
+          </div>
+          <canvas id="graficoBarras"></canvas>
 
-        </tbody>
-      </table>
-  </div>
+        </div>
+      </div>
+      <div class="ranking">
+        <h2>Ranking</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Posição</th>
+              <th>Usuário</th>
+              <th>Projetos Finalizados</th>
+            </tr>
+          </thead>
+          <tbody id="bodyranking">
+
+          </tbody>
+        </table>
+      </div>
     </div>
 </body>
+
 </html>
 <script>
   //LISTAR USUARIOS PARA O RANKING
-    // 
-  listaRanking=[]
+  // 
+  listaRanking = []
   function listarRanking() {
     fetch("/usuarios/listarRanking", {
       method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((usuarios) => {
-          usuarios.forEach((usuario) => {
-            listaRanking.push(usuario);
+    }).then(function (resposta) {
+      resposta.json().then(function (resposta) {
+        console.log(resposta)
+        listaRanking.push(resposta);
+        for (let i = 0; i < resposta.length; i++) {
 
-            console.log("listausuarios")
-            console.log(listaRanking)
-            bodyranking.innerHTML+=
-          });
-        });
-      })
+
+          console.log("listausuarios")
+          console.log(listaRanking)
+          bodyranking.innerHTML += `
+            <tr>
+              <td>${i + 1}</td>
+              <td>${resposta[i].nickname}</td>
+             <td>${resposta[i].projetos_concluidos}</td>
+           </tr>`
+        }
+      }
+      );
+    })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
@@ -117,175 +128,176 @@
 
 
 
-    perfil.innerHTML+=` 
+  perfil.innerHTML += ` 
       <img src="${sessionStorage.IMAGEM_USUARIO}"><br><p class="text">Olá <span id="b_usuario">${sessionStorage.NOME_USUARIO}</span>!<br>`
-         
-      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-  let projetosfinalizados=0
-  let projetosandamento=0
-  let graficodavez=null
-    window.onload=exibirProjetosFinalizados(),exibirProjetosAndamento(),exibirValorGasto(),plotarGraficoPizza(),listarRanking()
 
-function plotarGraficoBarrasMesValor() {
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  let projetosfinalizados = 0
+  let projetosandamento = 0
+  let graficodavez = null
+  window.onload = exibirProjetosFinalizados(), exibirProjetosAndamento(), exibirValorGasto(), plotarGraficoPizza(), listarRanking()
+
+  function plotarGraficoBarrasMesValor() {
     const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO || "[]");
-     if(graficodavez){
-          graficodavez.destroy()
-     }
+    if (graficodavez) {
+      graficodavez.destroy()
+    }
 
     const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     const valores = [];
     const mesesAno = [];
 
     for (let i = 0; i < projetos.length; i++) {
-        const projeto = projetos[i];
-        const data = new Date(projeto.dt_inicio);
-        const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
-        const valor = Number(projeto.valor || 0)
+      const projeto = projetos[i];
+      const data = new Date(projeto.dt_inicio);
+      const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
+      const valor = Number(projeto.valor || 0)
 
-        const indice = mesesAno.indexOf(mesAno);
-        if (indice=== -1) {
-            mesesAno.push(mesAno);
-            valores.push(valor);
-        } else {
-            valores[indice] += valor;
-        }
+      const indice = mesesAno.indexOf(mesAno);
+      if (indice === -1) {
+        mesesAno.push(mesAno);
+        valores.push(valor);
+      } else {
+        valores[indice] += valor;
+      }
     }
 
-    graficodavez= new Chart(document.getElementById('graficoBarras'), {
-        type: 'bar',
-        data: {
-            labels: mesesAno,
-            datasets: [{
-                label: 'Gastos (R$)',
-                data: valores,
-                backgroundColor: '#e657d3'
-            }]
+    graficodavez = new Chart(document.getElementById('graficoBarras'), {
+      type: 'bar',
+      data: {
+        labels: mesesAno,
+        datasets: [{
+          label: 'Gastos (R$)',
+          data: valores,
+          backgroundColor: '#e657d3'
+        }]
+      },
+      options: {
+        plugins: {
+
         },
-        options: {
-            plugins: {
-                
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
+        scales: {
+          y: { beginAtZero: true }
         }
+      }
     });
-}
-function plotarGraficoBarrasMesProjetos() {
+  }
+  function plotarGraficoBarrasMesProjetos() {
     const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO || "[]");
-          if(graficodavez){
-          graficodavez.destroy()
-     }
+    if (graficodavez) {
+      graficodavez.destroy()
+    }
 
 
     const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     const projetosconcluidos = [];
     const mesesAno = [];
     for (let i = 0; i < projetos.length; i++) {
-    
-        const projeto = projetos[i];
-        const data = new Date(projeto.dt_inicio);
-          const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
-        
-        if(projeto.estado=="finalizado"){
-             const indice = meses.indexOf(mesAno);
-        if (indice=== -1) {
-            mesesAno.push(mesAno);
-            projetosconcluidos.push(1);
+
+      const projeto = projetos[i];
+      const data = new Date(projeto.dt_inicio);
+      const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
+
+      if (projeto.estado == "finalizado") {
+        const indice = meses.indexOf(mesAno);
+        if (indice === -1) {
+          mesesAno.push(mesAno);
+          projetosconcluidos.push(1);
         } else {
-            projetosconcluidos[indice] += 1;
+          projetosconcluidos[indice] += 1;
         }
-        }
-     
+      }
+
     }
-  graficodavez= new Chart(document.getElementById('graficoBarras'), {
-        type: 'bar',
-        data: {
-            labels: mesesAno,
-            datasets: [{
-                label: 'Projetos concluidos',
-                data: projetosconcluidos,
-                backgroundColor: '#e657d3'
-            }]
+    graficodavez = new Chart(document.getElementById('graficoBarras'), {
+      type: 'bar',
+      data: {
+        labels: mesesAno,
+        datasets: [{
+          label: 'Projetos concluidos',
+          data: projetosconcluidos,
+          backgroundColor: '#e657d3'
+        }]
+      },
+      options: {
+        plugins: {
+
         },
-        options: {
-            plugins: {
-                
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
+        scales: {
+          y: { beginAtZero: true }
         }
+      }
     });
-}
-
-   
- 
-    function plotarGraficoPizza(){
-      const projetos=JSON.parse(sessionStorage.PROJETOS_USUARIO)
-         const data = {
-  labels: [
-    'Projetos finalizados',
-    'Projetos em andamento',
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [projetosfinalizados,projetosandamento],
-    backgroundColor: [
-      '#e657d3',
-      '#6165b8'
-
-    ],
-    hoverOffset: 4
-  }]
-};
-const div_graficoPizza=document.getElementById('graficoPizza')
-const graficoPizza = new Chart(div_graficoPizza,{
-  type: 'pie',
-  data: data,
-}
-  )  }
+  }
 
 
- function exibirProjetosFinalizados(){
-   const projetos= JSON.parse(sessionStorage.PROJETOS_USUARIO) 
 
-   for(let i= 0;i<projetos.length;i++){
+  function plotarGraficoPizza() {
+    const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
+    const data = {
+      labels: [
+        'Projetos finalizados',
+        'Projetos em andamento',
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [projetosfinalizados, projetosandamento],
+        backgroundColor: [
+          '#e657d3',
+          '#6165b8'
 
-    console.log (projetos[i])
-    if(projetos[i].estado=="finalizado"){
+        ],
+        hoverOffset: 4
+      }]
+    };
+    const div_graficoPizza = document.getElementById('graficoPizza')
+    const graficoPizza = new Chart(div_graficoPizza, {
+      type: 'pie',
+      data: data,
+    }
+    )
+  }
+
+
+  function exibirProjetosFinalizados() {
+    const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
+
+    for (let i = 0; i < projetos.length; i++) {
+
+      console.log(projetos[i])
+      if (projetos[i].estado == "finalizado") {
         projetosfinalizados++
 
-    }
+      }
 
-   }   console.log(projetosfinalizados)
-    div_kpi3.innerHTML+=`<h3>Projetos finalizados</h3>
+    } console.log(projetosfinalizados)
+    div_kpi3.innerHTML += `<h3>Projetos finalizados</h3>
     <span>${projetosfinalizados}</span>`
- }
- function exibirProjetosAndamento(){
-      const projetos= JSON.parse(sessionStorage.PROJETOS_USUARIO) 
+  }
+  function exibirProjetosAndamento() {
+    const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
 
-   for(let i= 0;i<projetos.length;i++){
+    for (let i = 0; i < projetos.length; i++) {
 
-    console.log (projetos[i])
-    if(projetos[i].estado=="iniciado"){
+      console.log(projetos[i])
+      if (projetos[i].estado == "iniciado") {
         projetosandamento++
 
-    }
+      }
 
-   }   console.log(projetosandamento)
-    div_kpi1.innerHTML+=`<h3>Projetos em andamento</h3>
-    <span>${projetosandamento}</span>` 
- }
-  function exibirValorGasto(){
-    const projetos= JSON.parse(sessionStorage.PROJETOS_USUARIO)
-    let valorgasto=0
-    for (let i=0;i<projetos.length;i++){
-      if(projetos[i].valor>0){
-        valorgasto+=Number(projetos[i].valor)
+    } console.log(projetosandamento)
+    div_kpi1.innerHTML += `<h3>Projetos em andamento</h3>
+    <span>${projetosandamento}</span>`
+  }
+  function exibirValorGasto() {
+    const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
+    let valorgasto = 0
+    for (let i = 0; i < projetos.length; i++) {
+      if (projetos[i].valor > 0) {
+        valorgasto += Number(projetos[i].valor)
       }
     }
-        div_kpi2.innerHTML+=`<h3>Total gasto</h3>
-    <span>R$${valorgasto}</span>` 
+    div_kpi2.innerHTML += `<h3>Total gasto</h3>
+    <span>R$${valorgasto}</span>`
   }
 </script>
