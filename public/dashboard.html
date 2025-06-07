@@ -55,6 +55,8 @@
         <div class="kpi" id="div_kpi3"></div>
 
     </div>
+    <div class="container">
+
     <div class="graficos">
     
     <div class="containerGraficoPizza">
@@ -68,11 +70,53 @@
 
     </div>
     </div>
+    <div class="ranking">
+      <h2>Ranking</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Posição</th>
+            <th>Usuário</th>
+            <th>Projetos Finalizados</th>
+          </tr>
+        </thead>
+        <tbody id="bodyranking">
+
+        </tbody>
+      </table>
   </div>
+    </div>
 </body>
 </html>
 <script>
-  
+  //LISTAR USUARIOS PARA O RANKING
+    // 
+  listaRanking=[]
+  function listarRanking() {
+    fetch("/usuarios/listarRanking", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((usuarios) => {
+          usuarios.forEach((usuario) => {
+            listaRanking.push(usuario);
+
+            console.log("listausuarios")
+            console.log(listaRanking)
+            bodyranking.innerHTML+=
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+
+
+
+
+
     perfil.innerHTML+=` 
       <img src="${sessionStorage.IMAGEM_USUARIO}"><br><p class="text">Olá <span id="b_usuario">${sessionStorage.NOME_USUARIO}</span>!<br>`
          
@@ -80,7 +124,7 @@
   let projetosfinalizados=0
   let projetosandamento=0
   let graficodavez=null
-    window.onload=exibirProjetosFinalizados(),exibirProjetosAndamento(),exibirValorGasto(),plotarGraficoPizza()
+    window.onload=exibirProjetosFinalizados(),exibirProjetosAndamento(),exibirValorGasto(),plotarGraficoPizza(),listarRanking()
 
 function plotarGraficoBarrasMesValor() {
     const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO || "[]");

@@ -59,6 +59,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
  var imagem= req.body.imagemPerfilServer
+ var nickname=req.body.nicknameServer
 
 
     // Faça as validações dos valores
@@ -72,7 +73,7 @@ function cadastrar(req, res) {
      else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha,imagem )
+        usuarioModel.cadastrar(nome, email, senha,imagem,nickname )
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -89,8 +90,19 @@ function cadastrar(req, res) {
             );
     }
 }
-
+function listarRanking(req, res) {
+  usuarioModel.listarRanking().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+function listarUsuarios(req, res) {
+  usuarioModel.listarUsuarios().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listarUsuarios,
+    listarRanking
 }

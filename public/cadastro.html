@@ -1,153 +1,206 @@
 <DOCTYPE html>
   <html lang="pt">
+
   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <link rel="stylesheet" href="cadastro.css">
-      <script src="js/sessao.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="cadastro.css">
+    <script src="js/sessao.js"></script>
   </head>
+
   <body>
-      <div id="navbar" class="header"> 
-          <img src="img/logoBranco.png" alt="">
-          <div class="navbar">
-              <li><a href="index.html">Home</a></li>
-          
-              <li><a href="login.html">Login</a></li>
-              <li><a href="cadastro.html">Cadastro</a></li>
+    <div id="navbar" class="header">
+      <img src="img/logoBranco.png" alt="">
+      <div class="navbar">
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="login.html">Login</a></li>
+        <li><a href="cadastro.html">Cadastro</a></li>
+      </div>
+    </div>
+    <div id="alertaErro" class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro">
+
+        </span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="box">
+        <div class="texto">
+          <h1>Crie sua conta</h1>
+          <p>Já possui cadastro? <a>Log in</a> </p>
+          <div class="inputBox">
+            <label for="ipt_nome">Nome</label>
+            <input type="text" id="ipt_nome" placeholder="Digite seu nome">
+            <label for="ipt_email">Email</label>
+            <input type="email" id="ipt_email" placeholder="Digite seu email">
+            <label for="ipt_senha">Senha</label>
+            <input type="password" id="ipt_senha" placeholder="Digite sua senha">
+            <label for="ipt_senha_confirma">Confirme sua senha</label>
+            <input type="password" id="ipt_senha_confirma" placeholder="Digite sua senha novamente">
+            <label for="ipt_nick">Nickname</label>
+            <input type="text" id="ipt_nick" placeholder="Escolha seu nickname">
+            <button onclick="cadastrar()">Cadastrar</button>
           </div>
-          </div>                      <div id="alertaErro" class="alerta_erro">
-                        <div class="card_erro" id="cardErro">
-                          <span id="mensagem_erro">
-            
-</span>
-                        </div>
-                      </div>
-          <div class="container">
-              <div class="box">
-                  <div class="texto">
-                      <h1>Crie sua conta</h1>
-                  <p>Já possui cadastro? <a>Log in</a> </p>
-                  <div class="inputBox">
-                    <label for="ipt_nome">Nome</label>
-                    <input type="text" id="ipt_nome" placeholder="Digite seu nome" > 
-                    <label for="ipt_email">Email</label>
-                    <input type="email" id="ipt_email" placeholder="Digite seu email" >
-                      <label for="ipt_senha">Senha</label>
-                      <input type="password" id="ipt_senha" placeholder="Digite sua senha" >
-                      <label for="ipt_senha_confirma">Confirme sua senha</label>
-                      <input type="password" id="ipt_senha_confirma" placeholder="Digite sua senha novamente" >
-                      <button onclick="cadastrar()">Cadastrar</button>
-                      </div>
-                  <div class="validacao" id="div_validacao"></div>
-                  </div>
-                  </div>
+          <div class="validacao" id="div_validacao"></div>
+        </div>
+      </div>
 
-                  </div>
+    </div>
 
 
-        <div id="div_erros_login"></div>
-          <button onclick="testar()"></button>
-      
+    <div id="div_erros_login"></div>
+    <button onclick="testar()"></button>
+
   </body>
+
   </html>
-<script> 
+  <script>
+    window.onload = listarUsuarios()
+    listaUsuarios = []
 
- 
 
 
 
-   function cadastrar() {
-  const NumeroAleatorio = Math.ceil(Math.random() * 5);
-  let imagemperfil=""
-    if(NumeroAleatorio==1){
-      imagemperfil="img/17.png"
+    function cadastrar() {
+      const NumeroAleatorio = Math.ceil(Math.random() * 5);
+      let imagemperfil = ""
+      if (NumeroAleatorio == 1) {
+        imagemperfil = "img/17.png"
 
-    }
-    else if(NumeroAleatorio==2){
-      imagemperfil="img/18.png"
-    }
-    else if(NumeroAleatorio==3){
-      imagemperfil="img/19.png"
-    }
-        else if(NumeroAleatorio==3){
-      imagemperfil="img/20.png"
-    }
-    else{
-            imagemperfil="img/21.png"
-    }
-console.log(imagemperfil)
-    div_validacao.innerHTML=""
-    const nomeVar = ipt_nome.value;
-    const emailVar = ipt_email.value;
-    const senhaVar = ipt_senha.value;
-    const senha_confirmaVar = ipt_senha_confirma.value;
-        if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      senha_confirmaVar == "" 
-    ) {
-        div_validacao.innerHTML+=`
+      }
+      else if (NumeroAleatorio == 2) {
+        imagemperfil = "img/18.png"
+      }
+      else if (NumeroAleatorio == 3) {
+        imagemperfil = "img/19.png"
+      }
+      else if (NumeroAleatorio == 3) {
+        imagemperfil = "img/20.png"
+      }
+      else {
+        imagemperfil = "img/21.png"
+      }
+      console.log(imagemperfil)
+      div_validacao.innerHTML = ""
+      const nomeVar = ipt_nome.value;
+      const emailVar = ipt_email.value;
+      const senhaVar = ipt_senha.value;
+      const senha_confirmaVar = ipt_senha_confirma.value;
+      const nicknamevar = ipt_nick.value;
+      if (
+        nomeVar == "" ||
+        emailVar == "" ||
+        senhaVar == "" ||
+        senha_confirmaVar == ""
+        || nicknamevar == ""
+      ) {
+        div_validacao.innerHTML += `
         <p>⚠️Não deixe nenhum campo em branco⚠️</p>`
         return
-    }
-    else if(senhaVar!=senha_confirmaVar){
-              div_validacao.innerHTML+=`
+      }
+      else if (senhaVar != senha_confirmaVar) {
+        div_validacao.innerHTML += `
         <p>⚠️Confirme a senha corretamente⚠️</p>`
         return
-    }
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        imagemPerfilServer:imagemperfil
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+      }
+      let nicknameigual = false
+      let emailigual = false
+      for (let i = 0; i < listaUsuarios.length; i++) {
+        if (listaUsuarios[i].nickname == nicknamevar) {
+          nicknameigual=true
+          break
 
-        if (resposta.ok) {
-                  Swal.fire({
-        title: "Bem vindo!",
-        text: "Seu cadastro foi realizado com sucesso, seja bem vindo ao Stich&Script! Você será direcionado para tela de login em alguns segundos💜",
-     imageUrl: "/img/gifcadastro.gif",
-        imageWidth: 400,
-
-
-    
-      });    setTimeout(() => {
-        window.location="login.html"
-
-      }, "5000");
-
-          limparFormulario();
-          finalizarAguardar()
-          
-        ;
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
         }
+        if (listaUsuarios[i].email == emailVar) {
+          emailigual = true
+          break
+        }
+      }
+      if (nicknameigual) {
+        div_validacao.innerHTML += `
+        <p>⚠️Esse nickname já está em uso⚠️</p>`
+        return
+      }
+      else if (emailigual) {
+        div_validacao.innerHTML += `
+        <p>⚠️Esse email já está em uso⚠️</p>`
+        return
+      }
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          imagemPerfilServer: imagemperfil,
+          nicknameServer: nicknamevar,
+        }),
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        ;
-      });
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
 
-    return false;
+          if (resposta.ok) {
+            Swal.fire({
+              title: "Bem vindo!",
+              text: "Seu cadastro foi realizado com sucesso, seja bem vindo ao Stich&Script! Você será direcionado para tela de login em alguns segundos💜",
+              imageUrl: "/img/gifcadastro.gif",
+              imageWidth: 400,
+
+
+
+            }); setTimeout(() => {
+              window.location = "login.html"
+
+            }, "5000");
+
+            limparFormulario();
+            finalizarAguardar()
+
+              ;
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          ;
+        });
+
+      return false;
     }
 
     function sumirMensagem() {
-        cardErro.style.display = "none"
+      cardErro.style.display = "none"
     }
 
-</script>
+    function listarUsuarios() {
+      fetch("/usuarios/listarUsuarios", {
+        method: "GET",
+      })
+        .then(function (resposta) {
+          resposta.json().then((usuarios) => {
+            usuarios.forEach((usuario) => {
+              listaUsuarios.push(usuario);
+
+              console.log("listausuarios")
+              console.log(listaUsuarios)
+            });
+          });
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+
+  </script>

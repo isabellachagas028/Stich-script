@@ -11,5 +11,10 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
-
+router.get("/listarUsuarios", function (req,res){
+    usuarioController.listarUsuarios(req,res)
+})
+router.get("/listarRanking", function (req,res){
+    usuarioController.listarRanking(req,res)
+})
 module.exports = router;

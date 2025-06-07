@@ -8,7 +8,7 @@ function buscarProjetosPorUsuario(req, res) {
       if (resultado.length > 0) {
         res.status(200).json(resultado);
       } else {
-        res.stat9us(204).json([])
+        res.status(204).json([])
       }
     })
     .catch(function (erro) {
