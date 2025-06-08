@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 .sidebar {
     position: fixed;
     top: 0;
@@ -79,13 +85,28 @@
   .main {
     margin-left: 60px;
     display: flex;
-
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px;
     width: 100%;
     height: 100vh;
     transition: margin-left 0.3s; 
 background-color: rgb(255 255 255) }
+.pagina{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .titulo{
+    font-size: 30px;
+    color: #6165b8;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+
 .kpis{
     display: flex;
     width: 60%;
@@ -94,21 +115,23 @@ background-color: rgb(255 255 255) }
 
 }
   .kpi{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-text-align: center;
-    height: 200px;
-    background-color:#dfdede6d;
-    border-radius: 20px;
-    color: #e657d3;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 200px;
+  height: 200px;
+  background-color: #f3eefb;
+  border-radius: 20px;
+  color:#6165b8;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   }
   .kpi h3{
     font-family: 'Tuffy';
     font-size: 20px;
+    height: 40px;
 
   }
   .kpi span{
@@ -120,20 +143,20 @@ text-align: center;
   .graficos{
     display: flex;
     gap: 50px  ;
-    width: 70%;
+    width: 100%;
     margin-top: 100px;
   }
   .containerGraficoPizza{
     width: 400px;
     height: 500px;
     border-radius: 20px;
-        background-color:#dfdede6d;
+
   }
   .containerGraficoBarrasMes{
         width: 700px;
     height: 500px;
     border-radius: 20px;
-        background-color:#dfdede6d;
+ 
   }
   #graficoPizza{
     width: 400px;
@@ -154,7 +177,8 @@ text-align: center;
     height: 50px;
     border: none;
     color: white;
-    background-color: #6165b8;    
+    background-color:#d636a1; 
+    border-radius: 10px;   
   }
   .container{
     display: flex;
@@ -162,18 +186,71 @@ text-align: center;
     justify-content: center;
 
   }
-  table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
+  .pagina2{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+
+  }
+.ranking {
   width: 100%;
+  max-width: 600px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: #e8ddf8;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  height: 90%;
+
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+.ranking h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6a1b9a;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
+.ranking table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ranking th,
+.ranking td {
+  padding: 14px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.ranking thead {
+  background-color: #6165b8;
+  color: white;
+}
+
+.ranking tbody tr:nth-child(even) {
+  background-color: #eebbee;
+}
+
+.ranking tbody tr:nth-child(odd) {
+  background-color: #fce8ff;
+}
+
+.ranking tbody tr:nth-child(1) {
+  background-color: #d636a1;
+  color: white;
+  font-weight: bold;
+}
+
+
+.containerGraficoPizza,
+.containerGraficoBarrasMes {
+  background-color: #f3eefb;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
