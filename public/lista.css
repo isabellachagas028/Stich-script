@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100%;
+    background-color: #6165b8;
+    backdrop-filter: blur 3px;
+    overflow-x: hidden;
+    transition: width 0.3s;
+    padding-top: 20px;
+    z-index: 100;
+  }
+
+  .sidebar:hover {
+    width: 200px;
+  }
+
+  .sidebar .perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .sidebar .perfil img {
+    border: solid black 2px;
+    border-radius: 50%;
+    width: 40px;
+  }
+
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .sidebar a:hover {
+    background-color: #514dbe;
+  }
+
+  i {
+    width: 24px;
+    margin-right: 16px;
+  }
+
+  .sidebar img-perfil {
+    border: seagreen 2 px solid;
+  }
+
+  .text {
+    white-space: nowrap;
+    opacity:0;
+    
+
+    color:white
+    ;
+    transition: opacity 0.2s;
+  }
+
+  .sidebar:hover .text {
+    opacity: 1;
+  }
+
+  .sidebar:hover~.main {
+    margin-left: 240px;
+  }
+    body{
+ background-color: #f3eefb;
+    font-family: poppins;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .main {
+    margin-left: 60px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    transition: margin-left 0.3s; 
+background-color: #f3eefb }
+.lista-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    background-color: #e8ddf8;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.lista-container h1 {
+    margin-bottom: 20px;
+    color: #6165b8;
+    font-size: 40px;
+}
+#ipt_item {
+    width: 60%;
+        background-color: #e8ddf8;
+        border: none;
+    padding: 10px;
+    border-bottom: 3px solid #6165b8;
+outline: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#ipt_quantidade {
+    width: 8%;
+    padding: 10px;
+        background-color: #e8ddf8;
+    border: none;
+    outline: none;
+    border-bottom: 3px solid #6165b8;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+#btn_add {
+    width: 20%;
+    padding: 10px;
+    background-color: #6165b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}

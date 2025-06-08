@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://kit.fontawesome.com/adb04f503a.js" crossorigin="anonymous"></script>
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+  </style>
+
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>projetos</title>
+  <link rel="stylesheet" href="lista.css">
+      <link rel="icon" href="img/iconesite.ico">
+  <script src="../js/sessao.js">
+  </script>
+</head>
+
+<body onload="validarSessao(), buscarEExibirProjetos(),  atualizacaoPeriodica()">
+
+
+
+  <div class="sidebar">
+    <div class="perfil" id="perfil">
+
+
+
+    </div>
+
+    <a href="#">
+      <i class="fa-solid fa-house"></i><span class="text"> Início</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
+    </a>
+    <a href="dashboard.html">
+      <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
+    </a>
+    <a href="#">
+      <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
+    </a>
+      <a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket"></i>
+      <span class="text">Sair</span>
+      </a>
+
+  </div>
+  <div class="main">
+<div class="lista-container">
+    <h1>Lista de compras</h1>
+    <div class="inputs">
+        <input type="text" id="ipt_item" placeholder="Adicionar item">
+    <input type="number" id="ipt_quantidade" placeholder="Qtd">
+    <button id="btn_add">Adicionar</button>
+    </div>
+
+</div>
+  </div>
+  </body>
+  </html>
+  <script>
+    function adicionar(){
+        const item=ipt_item.value
+        const quantidade=ipt_quantidade.value
+        fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          imagemPerfilServer: imagemperfil,
+          nicknameServer: nicknamevar,
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            Swal.fire({
+              title: "Bem vindo!",
+              text: "Seu cadastro foi realizado com sucesso, seja bem vindo ao Stich&Script! Você será direcionado para tela de login em alguns segundos💜",
+              imageUrl: "/img/gifcadastro.gif",
+              imageWidth: 400,
+
+
+
+            }); setTimeout(() => {
+              window.location = "login.html"
+
+            }, "5000");
+
+            limparFormulario();
+            finalizarAguardar()
+
+              ;
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          ;
+        });
+
+      return false;
+
+    }
+  </script>

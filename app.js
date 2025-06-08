@@ -6,7 +6,7 @@ var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
 // A sintaxe do operador ternário é: condição ? valor_se_verdadeiro : valor_se_falso
 
 require("dotenv").config({ path: caminho_env });
-const Swal = require('sweetalert2')
+
 var express = require("express");
 var cors = require("cors");
 var path = require("path");
@@ -21,6 +21,7 @@ var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var projetosRouter = require("./src/routes/projetos");
 var empresasRouter = require("./src/routes/empresas");
+var listasRouter=require("./src/routes/listas")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/projetos", projetosRouter);
 app.use("/empresas", empresasRouter);
+app.use("/listas",listasRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(`

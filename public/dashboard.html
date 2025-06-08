@@ -63,10 +63,12 @@
       <div class="graficos">
 
         <div class="containerGraficoPizza">
+          <h2>Status dos seus projetos</h2>
           <canvas id="graficoPizza"></canvas>
         </div>
 
         <div class="containerGraficoBarrasMes">
+
           <div class="botoes"> <button class="botaografico" onclick="plotarGraficoBarrasMesValor()">Gastos por
               mes</button><button class="botaografico" onclick="plotarGraficoBarrasMesProjetos()">Projetos finalizados
               por mes</button>
@@ -147,6 +149,7 @@
   window.onload = exibirProjetosFinalizados(), exibirProjetosAndamento(), exibirValorGasto(), plotarGraficoPizza(), listarRanking()
 
   function plotarGraficoBarrasMesValor() {
+    
     const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO || "[]");
     if (graficodavez) {
       graficodavez.destroy()

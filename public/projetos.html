@@ -84,13 +84,13 @@
   </div>
   <div class="main">
     <h1>Meus projetos</h1>
-
+      <h2>Projetos em andamento</h2>
  <button onclick="abrirformulario()" class="botaoadd" id="botaoadd">Adicionar projeto</button>
     <div class="container" id="projetosContainer">
-      <h1>Projetos em andamento</h1>
+
 
     </div>
-            <h1>Projetos finalizados</h1>
+            <h2>Projetos finalizados</h2>
       <div class="container" id="projetosContainerFinalizados">
         </div>
 
@@ -307,7 +307,7 @@ function atualizarestado(id){
       });
       setTimeout(() => {
         window.location.reload()
-      }, "10000");
+      }, "4000");
     }else{
       alert("Houve um erro ao atualizar o projeto")
     }
