@@ -36,7 +36,7 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 app.use("/projetos", projetosRouter);
 app.use("/empresas", empresasRouter);
-app.use("/listas",listasRouter)
+app.use("/listas",listasRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
