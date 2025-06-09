@@ -7,4 +7,9 @@ var listaController = require("../controllers/listaController");
 router.post("/adicionar", function (req, res) {
     listaController.adicionar(req, res);
 })
+router.get("/exibir/:idUsuario", function (req, res) {
+    listaController.exibir(req, res);
+}
+)
+
 module.exports = router;

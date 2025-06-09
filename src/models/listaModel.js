@@ -9,6 +9,15 @@ function adicionar(descricao, quantidade,fkUsuario){
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function exibir(usuarioId) {
+
+  var instrucaoSql = `select* from lista where fkusuario = ${usuarioId} `;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
 module.exports = {
-    adicionar
+    adicionar,
+    exibir
 };
