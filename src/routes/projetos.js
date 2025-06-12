@@ -25,5 +25,7 @@ router.delete("/deletar/:idProjeto", function (req, res) {
 router.put("/atualizarestado/:idProjeto", function (req, res) {
   ProjetoController.atualizarestado(req, res);
 })
-
+router.get("/tecnica/:idUsuario", function (req, res) {
+  ProjetoController.buscarTecnica(req, res);
+});
 module.exports = router;

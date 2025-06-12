@@ -8,9 +8,9 @@ function buscarProjetosPorUsuario(usuarioId) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(nome, descricao,dt_inicio,fio,agulha,estado,caminhoImagem,fkUsuario,valor) {
+function cadastrar(nome, descricao,dt_inicio,fio,agulha,estado,caminhoImagem,fkUsuario,valor,tecnica) {
   
-  var instrucaoSql = ` INSERT INTO projetos (nome, descricao, dt_inicio, fio, agulha, estado, imagem,fkUsuario, valor) VALUES ('${nome}', '${descricao}', '${dt_inicio}', '${fio}', '${agulha}', '${estado}','${caminhoImagem}',${fkUsuario},${valor})`;
+  var instrucaoSql = ` INSERT INTO projetos (nome, descricao, dt_inicio, fio, agulha, estado, imagem,fkUsuario, valor,tecnica) VALUES ('${nome}', '${descricao}', '${dt_inicio}', '${fio}', '${agulha}', '${estado}','${caminhoImagem}',${fkUsuario},${valor},'${tecnica}')`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -27,10 +27,20 @@ function atualizarestado(idProjeto, estado) {
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
+
 }
+function buscarTecnica(idUsuario) {
+   var instrucaoSql =`SELECT tecnica, COUNT(*) AS quantidade_projetos
+FROM projetos
+WHERE fkUsuario = ${idUsuario} and estado= "finalizado"
+GROUP BY tecnica;`
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);}
 module.exports = {
   buscarProjetosPorUsuario,
   cadastrar
   ,deletar,
+  buscarTecnica,
   atualizarestado
 }

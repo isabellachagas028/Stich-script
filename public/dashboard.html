@@ -34,9 +34,9 @@
     <a href="dashboard.html">
       <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
     </a>
-    <a href="#">
-      <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
-    </a>
+        <a href="lista.html">
+           <i class="fa-solid fa-list-check"></i> <span class="text">Lista de compras</span>
+        </a>
     <a href="#">
       <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
     </a>
@@ -63,7 +63,7 @@
       <div class="graficos">
 
         <div class="containerGraficoPizza">
-          <h2>Status dos seus projetos</h2>
+          <h2>Projetos concluidos por técnica</h2>
           <canvas id="graficoPizza"></canvas>
         </div>
 
@@ -146,7 +146,7 @@
   let projetosfinalizados = 0
   let projetosandamento = 0
   let graficodavez = null
-  window.onload = exibirProjetosFinalizados(), exibirProjetosAndamento(), exibirValorGasto(), plotarGraficoPizza(), listarRanking()
+  window.onload = exibirProjetosFinalizados(), exibirProjetosAndamento(), exibirValorGasto(), buscarTecnica(sessionStorage.ID_USUARIO), listarRanking()
 
   function plotarGraficoBarrasMesValor() {
     
@@ -207,11 +207,11 @@
     for (let i = 0; i < projetos.length; i++) {
 
       const projeto = projetos[i];
-      const data = new Date(projeto.dt_inicio);
+      const data = new Date(projeto.dt_final);
       const mesAno = `${meses[data.getMonth() + 1]}/${data.getFullYear()}`;
 
       if (projeto.estado == "finalizado") {
-        const indice = meses.indexOf(mesAno);
+        const indice = mesesAno.indexOf(mesAno);
         if (indice === -1) {
           mesesAno.push(mesAno);
           projetosconcluidos.push(1);
@@ -242,21 +242,45 @@
     });
   }
 
+  function buscarTecnica(idUsuario) {
+  
+    fetch(`/projetos/tecnica/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          resposta.reverse();
 
+          plotarGraficoPizza(resposta, idUsuario);
 
-  function plotarGraficoPizza() {
-    const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function plotarGraficoPizza(resposta, idUsuario) {
+    
+   let legenda=[]
+   let dados = []
+   for(let i = 0; i < resposta.length; i++) {
+      const tecnica = resposta[i].tecnica;
+      const quantidade = resposta[i].quantidade_projetos;
+
+      legenda.push(tecnica);
+      dados.push(quantidade);
+    }
     const data = {
-      labels: [
-        'Projetos finalizados',
-        'Projetos em andamento',
-      ],
+      labels: legenda,
       datasets: [{
         label: 'My First Dataset',
-        data: [projetosfinalizados, projetosandamento],
+        data: dados,
         backgroundColor: [
           '#e657d3',
-          '#6165b8'
+          '#6165b8',
+
 
         ],
         hoverOffset: 4
@@ -286,6 +310,7 @@
     div_kpi3.innerHTML += `<h3>Projetos finalizados</h3>
     <span>${projetosfinalizados}</span>`
   }
+
   function exibirProjetosAndamento() {
     const projetos = JSON.parse(sessionStorage.PROJETOS_USUARIO)
 

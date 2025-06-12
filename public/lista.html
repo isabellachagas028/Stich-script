@@ -14,7 +14,7 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projetos</title>
+    <title>Lista</title>
     <link rel="stylesheet" href="lista.css">
     <link rel="icon" href="img/iconesite.ico">
     <script src="../js/sessao.js">
@@ -32,17 +32,17 @@
 
         </div>
 
-        <a href="#">
+        <a href="index.html">
             <i class="fa-solid fa-house"></i><span class="text"> Início</span>
         </a>
-        <a href="#">
+        <a href="projetos.html">
             <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
         </a>
         <a href="dashboard.html">
             <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
         </a>
-        <a href="#">
-            <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
+        <a href="lista.html">
+           <i class="fa-solid fa-list-check"></i> <span class="text">Lista de compras</span>
         </a>
         <a href="#">
             <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
@@ -68,6 +68,11 @@
 
 </html>
 <script>
+    
+  perfil.innerHTML += ` 
+      <img src="${sessionStorage.IMAGEM_USUARIO}"><br><p class="text">Olá <span id="b_usuario">${sessionStorage.NOME_USUARIO}</span>!<br>`
+
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 window.onload=exibirLista()
     function adicionar() {
         const item = ipt_item.value
@@ -129,19 +134,24 @@ window.onload=exibirLista()
 <div class="item">
 
   <div class="descricao">
+    <input type="checkbox" id="checkbox_lista" onchange="atualizarestado(${item.id})">
         <p>${item.descricao}</p>
-        <p>${item.quantidade}
+        <p>X${item.quantidade}</p>
+        <button onclick="excluirItem(${item.id})">X</button>
   </div>
 
 </div>
 `;
-                            } else {
-                                document.getElementById("div_lista").innerHTML += `
+                            } 
+                            else if(item.estado=="comprado"){
+                                 document.getElementById("div_lista").innerHTML += `
 <div class="item">
 
-  <div class="descricao">
-        <p >${item.descricao}</p>
-        <p>${item.quantidade}
+  <div class="descricao" >
+    <input type="checkbox" id="checkbox_lista" onchange="atualizarestado(${item.id})" checked>
+        <p style=" text-decoration: line-through;">${item.descricao}</p>
+        <p>X${item.quantidade}</p>
+                <button onclick="excluirItem(${item.id})">X</button>
   </div>
 
 </div>
@@ -159,5 +169,47 @@ window.onload=exibirLista()
                 document.getElementById("div_lista").innerHTML = '<p>Erro ao carregar os projetos.</p>';
             });
     }
+
+    function atualizarestado(id){
+  fetch(`/listas/atualizar/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      estadoServer: "comprado"
+    })
+  })
+  .then(function(resposta){
+    if(resposta.ok){
+console.log("item atualizado com sucesso");
+  
+        window.location.reload()
+  
+    }else{
+      alert("Houve um erro ao atualizar o projeto")
+    }
+  })
+}
+
+    function excluirItem(idLista){
+  fetch(`/listas/excluir/${idLista}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(function(resposta){
+    if(resposta.ok){
+console.log("item atualizado com sucesso");
+      setTimeout(() => {
+        window.location.reload()
+      }, "100");
+    }else{
+      alert("Houve um erro ao atualizar o projeto")
+    }
+  })
+}
+
 
 </script>

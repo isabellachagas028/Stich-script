@@ -17,7 +17,21 @@ function exibir(usuarioId) {
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
+function atualizar(idLista,estado){
+    var instrucaoSql=`update lista set estado="${estado}" where id=${idLista};`
+      console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+
+}
+function excluirItem(idLista){
+    var instrucaoSql=`delete from lista where id=${idLista};`
+      console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+
+}
 module.exports = {
     adicionar,
-    exibir
+    exibir,
+    atualizar,
+    excluirItem
 };

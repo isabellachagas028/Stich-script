@@ -32,18 +32,18 @@
 
     </div>
 
-    <a href="#">
+    <a href="index.html">
       <i class="fa-solid fa-house"></i><span class="text"> Início</span>
     </a>
-    <a href="#">
+    <a href="projetos.html">
       <i class="fa-solid fa-folder-open"></i> <span class="text">Projetos</span>
     </a>
     <a href="dashboard.html">
       <i class="fa-solid fa-chart-simple"></i> <span class="text">Dashboard</span>
     </a>
-    <a href="#">
-      <i class="fa-solid fa-puzzle-piece"></i> <span class="text">Quiz</span>
-    </a>
+        <a href="lista.html">
+           <i class="fa-solid fa-list-check"></i> <span class="text">Lista de compras</span>
+        </a>
     <a href="#">
       <i class="fa-solid fa-inbox"></i> <span class="text">Contato</span>
     </a>
@@ -74,6 +74,16 @@
         <input type="date" id="ipt_data">
         <p>Valor gasto com o projeto R$</p>
         <input type="number" id="ipt_valor">
+         <p>Técnica</p>
+        <select name="tecnica" id="select_tecnica">
+          <option value="croche">Crochê</option>
+          <option value="trico">Tricô</option>
+          <option value="bordado">Bordado</option>
+          <option value="costura">Costura</option>
+          <option value="macrame">Macramê</option>
+          <option value="outro">Outro</option>
+
+        </select>
         <p>Imagem do projeto</p>
         <input type="file" id="ipt_imagem">
         <button onclick="cadastrar()" id="btn_adicionar">Adicionar Projeto</button>
@@ -109,6 +119,15 @@
     let valorvar=Number(ipt_valor.value)
     let foto=ipt_imagem.files[0]
     let usuario=sessionStorage.ID_USUARIO
+    let tecnica=select_tecnica.value
+    if (nomevar == "" || descricaovar == "" || fiovar == "" || agulhavar == "" || estadovar == "" || datavar == "" || valorvar == "" ) {
+      Swal.fire({
+        title: "Preencha todos os campos!",
+        text: "Não deixe nenhum campo em branco.",
+        icon: "warning",
+      });
+      return;
+    }
 
     const formData = new FormData();
     formData.append('nomeServer', nomevar)
@@ -118,6 +137,7 @@
     formData.append('valorServer', valorvar)
     formData.append('estadoServer', estadovar)
     formData.append('dataServer', datavar)
+    formData.append('tecnicaServer', tecnica)
     formData.append('fkUsuarioServer', usuario)
     formData.append('foto', foto)
     
@@ -173,7 +193,7 @@
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json().then(function (resposta) {
-                    console.log("AQUIII", resposta);
+                    console.log( resposta);
                     sessionStorage.PROJETOS_USUARIO = JSON.stringify(resposta);
                     if (resposta.length === 0) {
                         document.getElementById("projetosContainer").innerHTML = '<p>Nenhum projeto cadastrado ainda. Adicione um!</p>';

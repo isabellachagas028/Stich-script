@@ -19,7 +19,7 @@ function buscarProjetosPorUsuario(req, res) {
 }
 
 function cadastrar(req, res) {
-
+  let tecnica = req.body.tecnicaServer;
   let nome = req.body.nomeServer;
   let descricao = req.body.descricaoServer;
   let fio = req.body.fioServer;
@@ -44,11 +44,13 @@ function cadastrar(req, res) {
   } else if (estado == undefined) {
     res.status(400).send("O estado do projeto está indefinido!");
   }
+
+
   else if (fkUsuario == undefined) {
     res.status(400).send("O ID do usuário (fkUsuario) está indefinido!");
   } else {
 
-    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,caminhoImagem,fkUsuario, valor)
+    projetoModel.cadastrar(nome, descricao, dt_inicio, fio, agulha, estado,caminhoImagem,fkUsuario, valor,tecnica)
       .then(
         function (resultado) {
           res.json(resultado);
@@ -121,10 +123,28 @@ function atualizarestado(req, res) {
       );
   }
 }
+function buscarTecnica(req, res) {
+  var idUsuario = req.params.idUsuario;
+
+  projetoModel.buscarTecnica(idUsuario)
+    .then((resultado) => {
+      if (resultado.length > 0) {
+        res.status(200).json(resultado);
+      } else {
+        res.status(204).json([])
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar as técnicas: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    });
+}
 
 module.exports = {
   buscarProjetosPorUsuario,
   cadastrar
   , deletar,
-  atualizarestado
+  atualizarestado,
+  buscarTecnica
 };

@@ -11,5 +11,11 @@ router.get("/exibir/:idUsuario", function (req, res) {
     listaController.exibir(req, res);
 }
 )
+router.put("/atualizar/:idLista", function (req, res) {
+    listaController.atualizar(req, res);
+})
+router.delete("/excluir/:idLista", function (req, res) {
+    listaController.excluirItem(req, res);
+})
 
 module.exports = router;
